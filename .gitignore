@@ -52,3 +52,18 @@ docs/_build/
 
 # PyBuilder
 target/
+
+
+# Eclipse
+.settings/
+.project
+.classpath
+
+
+# Jetbrain PyCharm
+.idea/
+*.iws
+/bin/
+
+# Mac stuff
+.DS_Store
