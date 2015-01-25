@@ -1,5 +1,6 @@
-# covert-to-utf8
-This project will convert non UTF encoded (such as GB2312, GBK, BIG5 encoded) files, along with source code files such as .java, to utf-8 files 
+# Convert To UTF-8
+
+This project will convert non-UTF-encoded (such as GB2312, GBK, BIG5 encoded) files, along with source code files such as .java, to UTF-8 encoded files.
 
 
 ## Installation
