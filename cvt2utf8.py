@@ -4,7 +4,7 @@ import chardet
 import os
 
 #Config info, please change!
-root_path = 'C:/Users/main/Desktop/Java'
+root_path = '/the/path/to/your/project/source/code ' # Important: please change this !
 ext_filter = ['txt','java','py','php']
 
 
