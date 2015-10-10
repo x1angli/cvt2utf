@@ -1,4 +1,4 @@
-# Convert To UTF8
+# Encode Your Text Files in UTF-8
 
 This lightweight tool converts non-UTF-encoded (such as GB2312, GBK, BIG5 encoded) files, along with .java or other types of source code files, to UTF-8 encoded files.
 
@@ -16,3 +16,5 @@ This lightweight tool converts non-UTF-encoded (such as GB2312, GBK, BIG5 encode
 
         python cvt2utf8.py
         
+## Note
+By default, the converted output text files will NOT contain BOM (byte order mark). Should you have no idea of BOM, just check: https://en.wikipedia.org/wiki/Byte_order_mark 
