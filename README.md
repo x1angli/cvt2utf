@@ -4,7 +4,7 @@ This lightweight tool converts non-UTF-encoded (such as GB2312, GBK, BIG5 encode
 
 
 ## Installation
-1. Make sure Python 3.3 or above is properly installed
+1. Make sure Python 3 is properly installed
 1. Run the following commands
 
         pip install -r requirements.txt
