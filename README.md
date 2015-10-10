@@ -14,7 +14,7 @@ This lightweight tool converts non-UTF-encoded (such as GB2312, GBK, BIG5 encode
         . venv/bin/activate
         pip install -r requirements.txt
     
-    For Windows users, you need to replace the 4th row above with "venv\bin\activate"  
+    Note: For Windows users, you need to replace the 4th row above with "venv\bin\activate"  
 
 ## Usage
 1. Modify the `cvt2utf8.py` file to point to the root path to the folder containing the files you want to convert.
