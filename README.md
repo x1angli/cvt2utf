@@ -1,4 +1,4 @@
-# Convert To UTF-8
+# Convert To UTF8
 
 This lightweight tool converts non-UTF-encoded (such as GB2312, GBK, BIG5 encoded) files, along with .java or other types of source code files, to UTF-8 encoded files.
 
