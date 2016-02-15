@@ -21,9 +21,10 @@ This lightweight tool converts non-UTF-encoded (such as GB2312, GBK, BIG5 encode
 Before running the code, you __must modify__ the `cvt2utf8.py` file. 
 
 1. Point to the root path to the folder containing the files you want to convert.
-In the line '''root_path ''' please point "root_path" to the folder under which you want the files to be translated to UTF8-encoded. 
+In the line `root_path` please point "root_path" to the folder under which you want the files to be translated to UTF8-encoded. 
+
 2. List all the types of files you want to convert. 
-Just change the '''ext_filter''' to include the file extensions. 
+Just change the `ext_filter` to include the file extensions. 
 
 
 ## Usage
