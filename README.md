@@ -37,7 +37,8 @@ If you've done installation and configuration, simply run the following command:
 
 Afterwards, you could use any text editor (e.g. [Notepad++] (https://notepad-plus-plus.org/)) to verify the text files underneath the specified folder are already converted to UTF-8.
         
-## Note
+## Miscellaneous
+
 By default, the converted output text files will __NOT__ contain BOM (byte order mark). Should you want to learn what is BOM along with its implication, please check: https://en.wikipedia.org/wiki/Byte_order_mark 
 
 ## FAQ
