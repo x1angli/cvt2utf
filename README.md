@@ -15,6 +15,7 @@ This lightweight tool converts non-UTF-encoded (such as GB2312, GBK, BIG5 encode
         pip install -r requirements.txt
     
     Note #1: If you place this project into a folder whose name is different from "utf8_encode", please make appropriate change to the 1st line above.
+    
     Note #2: For Windows users, you need to replace the 4th line above with `venv\bin\activate`
 
 ## Configuration
@@ -57,3 +58,6 @@ __A__: Most compilers and interpreters can handle UTF-8 source code files very w
 
 Side note: of course, there are certain situations where BOMs are preferred. (For example, Microsoft Excel cannot parse correctly UTF8 w/o BOM CSV files with international characters. ) Such situations are rare. Overall, the necessity of BOM trumps other concerns. 
 
+#### Questions? Bug reports? 
+
+__A__: Feel free to send me an email: xl#x1ang.li (Please replace the hashtag with the "@" symbol)
