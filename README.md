@@ -15,15 +15,17 @@ This lightweight tool converts non-UTF-encoded (such as GB2312, GBK, BIG5 encode
         pip install -r requirements.txt
     
     Note #1: If you place this project into a folder whose name is different from "utf8_encode", please make appropriate change to the 1st line above.
-    Note #2: For Windows users, you need to replace the 4th line above with "venv\bin\activate"
+    Note #2: For Windows users, you need to replace the 4th line above with `venv\bin\activate`
 
 ## Configuration
 Before running the code, you __must modify__ the `cvt2utf8.py` file. 
 
-1. Point to the root path to the folder containing the files you want to convert.
+__* Tell the code where is your work space__
+
 In the line `root_path` please point "root_path" to the folder under which you want the files to be translated to UTF8-encoded. 
 
-2. List all the types of files you want to convert. 
+__* List all the types of files you want to convert__
+
 Just change the `ext_filter` to include the file extensions. 
 
 
@@ -39,4 +41,19 @@ By default, the converted output text files will __NOT__ contain BOM (byte order
 
 ## FAQ
 
-1. W
+#### Why do we choose UTF-8 among all charsets? 
+
+__A__: For i18n, UTF-8 is wide spread. It is the defacto starndard for non-English texts.
+
+Compared with UTF-16, UTF-8 is usually more compact and "with full fidelity". It also doesn't suffer from the endianness issue of UTF-16. 
+
+#### Why do we need this tool?
+
+__A__: Indeed, there are a bunch of text editors out there (such as Notepad++) that handle various encodings of text files very well. Yet for the purpose of __batch conversion__ we need this Python script. This script is also written for educational purpose -- developers can learn from this script to get an idea of how to handle text encoding.
+
+#### Why should we remove BOMs (byte order mark) rather than add them?
+
+__A__: Most compilers and interpreters can handle UTF-8 source code files very well, provided that those files are encoded __w/o__ BOM. Some compilers/interpreters might fail or give unexpected output whenever BOM is present. For this reason, I strongly advise the removal of BOM whenever we use UTF-8 enconing. 
+
+Side note: of course, there are certain situations where BOMs are preferred. (For example, Microsoft Excel cannot parse correctly UTF8 w/o BOM CSV files with international characters. ) Such situations are rare. Overall, the necessity of BOM trumps other concerns. 
+
