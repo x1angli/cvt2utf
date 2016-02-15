@@ -6,15 +6,16 @@ This lightweight tool converts non-UTF-encoded (such as GB2312, GBK, BIG5 encode
 ## Installation
 1. Make sure Python 3 is properly installed. 
 1. Also make sure `virtualenv` is installed. (Windows: `pip install virtualenv`, Linux: `$ sudo pip install virtualenv`)
-1. Run the following commands
+1. Clone this project onto your local hard drive, assuming the local folder name is "utf8_encode", which is the same as the project name. 
+1. Run the following commands:
 
-        rem Enter the folder of this project
         cd utf8_encode
         virtualenv venv
         . venv/bin/activate
         pip install -r requirements.txt
     
-    Note: For Windows users, you need to replace the 4th row above with "venv\bin\activate"  
+    Note #1: If you place this project into a folder whose name is different from "utf8_encode", please make appropriate change to the 1st line above.
+    Note #2: For Windows users, you need to replace the 4th line above with "venv\bin\activate"
 
 ## Usage
 1. Modify the `cvt2utf8.py` file to point to the root path to the folder containing the files you want to convert.
@@ -23,4 +24,4 @@ This lightweight tool converts non-UTF-encoded (such as GB2312, GBK, BIG5 encode
         python cvt2utf8.py
         
 ## Note
-By default, the converted output text files will NOT contain BOM (byte order mark). Should you have no idea of BOM, just check: https://en.wikipedia.org/wiki/Byte_order_mark 
+By default, the converted output text files will __NOT__ contain BOM (byte order mark). Should you want to learn what is BOM along with its implication, please check: https://en.wikipedia.org/wiki/Byte_order_mark 
