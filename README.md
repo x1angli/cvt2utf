@@ -5,12 +5,12 @@ This lightweight tool converts non-UTF-encoded (such as GB2312, GBK, BIG5 encode
 
 ## Installation
 1. Make sure Python 3 is properly installed. 
-1. Also make sure `virtualenv` is installed. (Windows: `pip install virtualenv`, Linux: `$ sudo pip install virtualenv`)
+1. Also make sure `virtualenv` is installed. (Windows: `pip install virtualenv`, Linux: `sudo pip install virtualenv`)
 1. Clone this project onto your local hard drive, assuming the local folder name is "utf8_encode", which is the same as the project name. 
 1. Run the following commands:
 
         cd utf8_encode
-        virtualenv venv
+        virtualenv ./venv
         . venv/bin/activate
         pip install -r requirements.txt
     
@@ -18,24 +18,44 @@ This lightweight tool converts non-UTF-encoded (such as GB2312, GBK, BIG5 encode
     
     Note #2: For Windows users, you need to replace the 4th line above with `venv\bin\activate`
 
-## Configuration
-Before running the code, you __must modify__ the `cvt2utf8.py` file. 
+## Usage
+There are two arguments.
 
-__* Tell the code where is your work space__
+__* The base directory (Required)__
 
 In the line `root_path` please point "root_path" to the folder under which you want the files to be translated to UTF8-encoded. 
+
+    python cvt2utf8.py
 
 __* List all the types of files you want to convert__
 
 Just change the `ext_filter` to include the file extensions. 
 
-
-## Usage
-If you've done installation and configuration, simply run the following command:
-        
-    python cvt2utf8.py
-
 Afterwards, you could use any text editor (e.g. [Notepad++] (https://notepad-plus-plus.org/)) to verify the text files underneath the specified folder are already converted to UTF-8.
+
+#### (Linux only) Directly run the program
+
+Sometimes, you may want to run the program without specifying the Python interpretor, such as:
+    
+    ./cvt2utf8.py
+    
+(Note the leading `python` command is missing here)
+
+To achieve this, you first need to grant the execution permission onto the Python, (skip this provided it already have the eXecution permission:
+
+    sudo chmod +x ./cvt2utf8.py
+
+Then activate the virtual environment:
+    
+    . venv/bin/activate
+
+Alternatively, if you already have all dependencies installed with your default python environment, or you've already activated virtualenv’s python you could skip this. 
+
+Finally, execute the file: (you could add command arguments here):
+
+    ./cvt2utf8.py ~/the/base/dir
+
+You might want to use absolute path for this program if you are running it in an arbitrary working directory.
         
 ## Miscellaneous
 
@@ -45,7 +65,7 @@ By default, the converted output text files will __NOT__ contain BOM (byte order
 
 #### Why do we choose UTF-8 among all charsets? 
 
-__A__: For i18n, UTF-8 is wide spread. It is the defacto starndard for non-English texts.
+__A__: For i18n, UTF-8 is wide spread. It is the de facto standard for non-English texts.
 
 Compared with UTF-16, UTF-8 is usually more compact and "with full fidelity". It also doesn't suffer from the endianness issue of UTF-16. 
 
@@ -55,10 +75,10 @@ __A__: Indeed, there are a bunch of text editors out there (such as Notepad++) t
 
 #### Why should we remove BOMs (byte order mark) rather than add them?
 
-__A__: Most compilers and interpreters can handle UTF-8 source code files very well, provided that those files are encoded __w/o__ BOM. Some compilers/interpreters might fail or give unexpected output whenever BOM is present. For this reason, I strongly advise the removal of BOM whenever we use UTF-8 enconing. 
+__A__: Most compilers and interpreters can handle UTF-8 source code files very well, provided that those files are encoded __w/o__ BOM. Some compilers/interpreters might fail or give unexpected output whenever BOM is present. For this reason, I strongly advise the removal of BOM whenever we use UTF-8 encoding. 
 
 Side note: of course, there are certain situations where BOMs are preferred. (For example, Microsoft Excel cannot parse correctly UTF8 w/o BOM CSV files with international characters. ) Such situations are rare. Overall, the necessity of BOM trumps other concerns. 
 
 #### Questions? Bug reports? 
 
-__A__: Feel free to send me an email: xl#x1ang.li (Please replace the hashtag with the "@" symbol)
+__A__: Feel free to send me an email: xl#x1ang.li (Please replace the hash tag with the "@" symbol)
