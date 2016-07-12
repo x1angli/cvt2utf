@@ -141,6 +141,8 @@ __A__: Most compilers and interpreters can handle UTF-8 source code files very w
 
 Side note: of course, there are certain situations where BOMs are preferred. (For example, Microsoft Excel cannot parse correctly UTF8 w/o BOM CSV files with international characters. ) Such situations are rare. Overall, the necessity of BOM trumps other concerns. 
 
-#### Questions? Bug reports? 
+#### Shall we trust this program?
 
-__A__: Feel free to send me an email: xl#x1ang.li (Please replace the hash tag with the "@" symbol)
+__A__: This code is still at its "beta" phase. We are working to provide a reliable solution to our users. Until then, we suggest you use this program/module with caution. Additionally, you should be aware of:
+1. that Python's built-in encoding/decoding mechanism is not reliable. In an experiment where I attempted to convert 1000+ text files into UTF-8 encoding. there was one file that was totally scrambled. Luckily, there was a backup, so I used a text editor to manually convert it to UTF-8. 
+2. that different standard or code may interpret special characters differently. For example, chardet package treats some special characters as "illegitimate", while a text editor may tolerate it.
