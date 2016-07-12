@@ -145,6 +145,8 @@ Side note: of course, there are certain situations where BOMs are preferred. (Fo
 
 __A__: This code is still at its "beta" phase. We are working to provide a reliable solution to our users. Until then, we suggest you use this program/module with caution. Additionally, you should be aware of:
 
-1. that Python's built-in encoding/decoding mechanism is not reliable. In an experiment where I attempted to convert 1000+ text files into UTF-8 encoding. there was one file that was totally scrambled. Luckily, there was a backup, so I used a text editor to manually convert it to UTF-8. 
+1. that Python's built-in encoding/decoding mechanism is not reliable. In an experiment where I attempted to convert 1000+ text files into UTF-8 encoding. there was one file that was totally scrambled. Luckily, this program creates backups by default. With the recovered backup file, the conversion was achieved through a text editor. 
 
 2. that different standard or code may interpret special characters differently. For example, chardet package treats some special characters as "illegitimate", while a text editor may tolerate it.
+
+Bottom line: backup is a reliable safety net, and you should stick with it. 
