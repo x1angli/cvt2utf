@@ -3,21 +3,30 @@
 
 __author__ = 'x1ang.li'
 
-import logging, os, argparse
+import logging, os, argparse, textwrap
+import time
 import chardet
 
-default_extlist = ['txt','java','jsp','py','php','js'] # The default file extensions
-                                              # Only those files ending with extensions in this list will be converted.
-                                              # Feel free to change this
-remove_BOM = True
+# Default configuration will take effect when corresponding input args are missing.
+# Feel free to change this for your convenience.
+default_conf = {
+    # Only those files ending with extensions in this list will be scanned or converted.
+    'exts'      : ['txt','java','jsp','py','php','js'],
+    'keep_BOM'  : False,
+    'overwrite' : False,
+}
 
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
 log = logging.getLogger(__name__)
 
 
 class Convert2Utf8:
-    def __init__(self, extlist):
-        self.extlist = extlist
+    def __init__(self, exts, keep_BOM, overwrite):
+        self.exts = exts
+        self.skip_encoding = ['ascii', 'utf-8']
+        if keep_BOM:
+            self.skip_encoding.append('utf-8-sig')
+        self.overwrite = overwrite
 
     def walk_dir(self, dirname):
         for root, dirs, files in os.walk(dirname):
@@ -26,14 +35,17 @@ class Convert2Utf8:
                 # On linux there is a newline at the end which will cause the match to fail, so we just 'strip()' the '\n'
                 # Also, add 'lower()' to ensure matching
 
-                if (extension in self.extlist):
+                if (extension in self.exts):
                     fullname = os.path.join(root, name)
                     try:
                         self.convert_file(fullname)
                     except IOError:
                         log.error("Unable to read or write the file: %s. Please check the file's permission.", fullname)
+                    except KeyboardInterrupt:
+                        log.warning("Interrupted by keyboard (e.g. Ctrl+C)")
+                        exit()
                     # else:
-                    #     logging.error("Unable to process the file: %s. Please check.", fullname)
+                    #     log.error("Unable to process the file: %s. Please check.", fullname)
                     #     traceback.print_stack()
 
 
@@ -47,30 +59,26 @@ class Convert2Utf8:
             return
 
         encoding = chardet.detect(bytedata)['encoding']
-        log.debug("Start scanning %s, which is %s - encoded", filename, encoding)
-
         if encoding == None:
             log.warning("Unable to detect the encoding of %s, so just leave it there.", filename)
             return
 
-        if encoding.lower() == 'ascii':
+        log.debug("Start scanning %s, which is %s - encoded", filename, encoding)
+        encoding = encoding.lower()
+        if (encoding in self.skip_encoding):
             log.debug("Skipped %s - encoded %s", filename, encoding)
             return
 
-        if remove_BOM:
-            if encoding.lower() == 'utf-8':
-                log.debug("Skipped %s - encoded %s", filename, encoding)
-                return
-        else:
-            if encoding.lower().startswith('utf-8'):
-                log.debug("Skipped %s - encoded %s", filename, encoding)
-                return
-
-        log.info("Start coverting %s, whose encoding is %s", filename, encoding)
-
+        # Since chardet only recognized all GB-based encoding as 'gb2312', we may encounter errors when the text file
+        # contains certain charaters, breaking the program. To make it more special-character-tolerant, we should
+        # upgrade the encoding to 'gb18030', which contains more characters than gb2312.
         if encoding.lower() == 'gb2312':
             encoding = 'gb18030'
 
+        # preserving file time information (modification time and access time)
+        old_stat = os.stat(filename)
+
+        log.debug("Start coverting %s, whose encoding is %s", filename, encoding)
         try:
             strdata = bytedata.decode(encoding)
         except UnicodeDecodeError as e:
@@ -78,48 +86,125 @@ class Convert2Utf8:
             print(e)
             return
 
-        log.debug("Overwriting file: %s in UTF-8", filename)
+        # if the 'overwrite' flag is 'False', we would make a backup of the original text file.
+        if not self.overwrite:
+            backup_name = filename + '.bak'
+            i = 0
+            while os.path.exists(backup_name):
+                backup_name = filename + '.bak' + str(i)
+                i = i+1
+            log.debug("Renaming old file %s to new file %s", filename, backup_name)
+            os.rename(filename, backup_name)
+
+        log.debug("Writing the file: %s in UTF-8", filename)
         with open(filename, 'wb') as f: # write under the binary mode
             f.write(strdata.encode('utf-8'))
-        log.info("Finished converting the file: %s to UTF-8", filename)
+
+        # setting the new file's time to the old file
+        os.utime(filename, times = (old_stat.st_atime, old_stat.st_ctime))
+        log.info("Converted the file: %s to UTF-8 from %s", filename, encoding)
+    # end of def convert_file(self, filename)
 
 
 
     def run(self, root):
         if not os.path.exists(root):
-            log.error("The file specified %s is neither a directory or a regular file", root)
+            log.error("The file specified %s is neither a directory nor a regular file", root)
             return
 
         log.info("Start working now!")
 
         if os.path.isdir(root):
             log.info("The root is: %s. ", root)
-            log.info("Files with these extension names will be inspected: %s", self.extlist)
+            log.info("Files with these extension names will be inspected: %s", self.exts)
             self.walk_dir(root)
         else:
             log.info("Wow, only a single file will be processed: %s", root)
             self.convert_file(root)
 
         log.info("Finished all.")
+    # end of def run(self, root):
 
-        # If we hit here, it means the file specified is neither a directory or a regular file
+def clean_backups(dirname):
+    if not os.path.isdir(dirname):
+        log.error("The file specified %s is not a directory ", dirname)
+        return
+
+    now = time.time()
+    last40min = now - 60 * 40
+
+    log.info("Removing all newly-created .bak files under %s", dirname)
+
+    for root, dirs, files in os.walk(dirname):
+        for name in files:
+            extension = os.path.splitext(name)[1][1:]
+            if extension.startswith('bak'):
+                fullname = os.path.join(root, name)
+                ctime = os.path.getctime(fullname)
+                if ctime > last40min:
+                    os.remove(fullname)
+                    log.info("Removed the file: %s", fullname)
 
 
+def main():
+    parser = argparse.ArgumentParser(
+        prog='cvt2utf8',
+        description="A tool that converts non-UTF-encoded text files UTF-8 encoded files.",
+        epilog="You can use this tool to remove BOM from .php source code files, or convert other encoding into UTF-8")
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        'root',
+        metavar = "FILENAME",
+        help    = textwrap.dedent('''\
+            the path pointing to the file or directory.
+            If it's a directory, files contained in it with specified extensions will be converted to UTF-8.
+            Otherwise, if it's a file, only that file will be converted to UTF-8.''')
+        )
 
-    parser.add_argument('--exts', nargs='+', # '+'. Just like '*', all command-line args present are gathered into a list.
-                        default=default_extlist,
-                        help="the list of file extensions. Only those files ending with extensions in this list will be converted.")
+    parser.add_argument(
+        '-e',
+        '--exts',
+        nargs   = '+', # '+'. Just like '*', all command-line args present are gathered into a list.
+        default = default_conf['exts'],
+        help    = "the list of file extensions. Only those files ending with extensions in this list will be converted.",
+        )
 
-    parser.add_argument('root',
-                        help="the path pointing to the file or directory. \
-                        If it's a directory, files contained in it with specified extensions will be converted to UTF-8. \
-                        Otherwise, if it's a file, only that file will be converted to UTF-8")
+    parser.add_argument(
+        '-o',
+        '--overwrite',
+        action  = 'store_true',
+        default = default_conf['overwrite'],
+        help    = "Danger! If you turn this switch on, it would directly overwrite existing file without creating any backups.",
+        )
+
+    parser.add_argument(
+        '-k',
+        '--keepbom',
+        action  = 'store_true',
+        dest    = 'keep_BOM',
+        default = default_conf['keep_BOM'],
+        help    = "If the text file begins with UTF-8's Byte-Order-Mask, we would keep it rather than remove it.",
+        )
+
+    parser.add_argument(
+        '-c',
+        '--cleanbak',
+        action  = 'store_true',
+        dest    = 'clean_bak',
+        default = False,
+        help    = textwrap.dedent('''Clean all .bak files generated within last 40 minutes.
+                        When enabled, no files will be converted to UTF-8. Use this flag with extra caution! '''),
+        )
 
 
     args = parser.parse_args()
 
-    cvt2utf8 = Convert2Utf8(args.exts)
-    cvt2utf8.run(args.root)
+    if args.clean_bak:
+        clean_backups(args.root)
+
+    else:
+        cvt2utf8 = Convert2Utf8(args.exts, args.keep_BOM, args.overwrite)
+        cvt2utf8.run(args.root)
+
+if __name__ == '__main__':
+    main()
