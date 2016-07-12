@@ -26,13 +26,14 @@ There is only one mandatory argument: filename, where you can specify the direct
 ___Examples:___
 
 * Change all .txt files to UTF-8 encoding. 
---- Those byte-order marks a.k.a. "BOM"s or "signature"s in existing UTF-8 files will be removed. 
+    
+    Those byte-order marks a.k.a. "BOM"s or "signature"s in existing UTF-8 files will be removed. 
 
 
     `python cvt2utf8.py "D:\mynotebook"`
     
 
-Afterwards, you could use any text editor (e.g. [Notepad++] (https://notepad-plus-plus.org/)) to verify the text files underneath the specified folder are already converted to UTF-8.
+    Afterwards, you could use any text editor (e.g. [Notepad++] (https://notepad-plus-plus.org/)) to verify the text files underneath the specified folder are already converted to UTF-8.
 
 * Change all .csv files to UTF-8 encoding. Since BOM are used by some applications (such as Microsoft Excel)
 
@@ -41,7 +42,8 @@ Afterwards, you could use any text editor (e.g. [Notepad++] (https://notepad-plu
 
 
 * Convert all .php, .js, .java, .py files to UTF-8 encoding. 
---- Also, make sure all BOMs are removed. They are really nuisance for source code files!
+
+    Also, make sure all BOMs are removed. They are really nuisance for source code files!
 
 
     `python cvt2utf8.py "D:\workspace" --exts php js java py`
