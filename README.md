@@ -27,43 +27,25 @@ ___Examples:___
 
 * Change all .txt files to UTF-8 encoding. 
 --- Those byte-order marks a.k.a. "BOM"s or "signature"s in existing UTF-8 files will be removed. 
-
-
-    python cvt2utf8.py "D:\mynotebook"
-
+    `python cvt2utf8.py "D:\mynotebook"`
 Afterwards, you could use any text editor (e.g. [Notepad++] (https://notepad-plus-plus.org/)) to verify the text files underneath the specified folder are already converted to UTF-8.
 
-
 * Change all .csv files to UTF-8 encoding. Since BOM are used by some applications (such as Microsoft Excel)
-
-
-    python cvt2utf8.py "D:\mynotebook" --exts csv --keepbom
-
+    `python cvt2utf8.py "D:\mynotebook" --exts csv --keepbom`
 
 * Convert all .php, .js, .java, .py files to UTF-8 encoding. 
 --- Also, make sure all BOMs are removed. They are really nuisance for source code files!
-
-
-    python cvt2utf8.py "D:\workspace" --exts php js java py
-
-
-* After manually verify the new UTF-8 files are correct, you can remove all .bak files
-
-
-    python cvt2utf8.py "D:\workspace" --cleanbak
-
+    `python cvt2utf8.py "D:\workspace" --exts php js java py`
     
+* After manually verify the new UTF-8 files are correct, you can remove all .bak files
+    `python cvt2utf8.py "D:\workspace" --cleanbak`
+
 * Alternatively, if you are confident with Python's in-house encoding and decoding, you can simply convert files without creating backups.
 --- Do NOT do this, unless you know what you are doing. 
-
-
-    python cvt2utf8.py "D:\workspace" --overwrite
-
+    `python cvt2utf8.py "D:\workspace" --overwrite`
 
 * Converts an individual file
-
-
-    python cvt2utf8.py "D:\workspace\a.txt"
+    `python cvt2utf8.py "D:\workspace\a.txt"`
 
 #### (Linux only) Directly run the program
 
