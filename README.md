@@ -26,6 +26,7 @@ There is only one mandatory argument: filename, where you can specify the direct
 ___Examples:___
 
 * Change all .txt files to UTF-8 encoding. 
+    
     Those byte-order marks a.k.a. "BOM"s or "signature"s in existing UTF-8 files will be removed. 
 
 
@@ -55,7 +56,8 @@ ___Examples:___
 
 
 * Alternatively, if you are confident with Python's in-house encoding and decoding, you can simply convert files without creating backups.
---- Do NOT do this, unless you know what you are doing. 
+    
+    Do NOT do this, unless you know what you are doing. 
 
 
     `python cvt2utf8.py "D:\workspace" --overwrite`
