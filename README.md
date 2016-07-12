@@ -26,7 +26,6 @@ There is only one mandatory argument: filename, where you can specify the direct
 ___Examples:___
 
 * Change all .txt files to UTF-8 encoding. 
-    
     Those byte-order marks a.k.a. "BOM"s or "signature"s in existing UTF-8 files will be removed. 
 
 
