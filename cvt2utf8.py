@@ -11,7 +11,7 @@ import chardet
 # Feel free to change this for your convenience.
 default_conf = {
     # Only those files ending with extensions in this list will be scanned or converted.
-    'exts'      : ['txt','java','jsp','py','php','js'],
+    'exts'      : ['txt'],
     'keep_BOM'  : False,
     'overwrite' : False,
 }
@@ -154,7 +154,7 @@ def main():
 
     parser.add_argument(
         'root',
-        metavar = "FILENAME",
+        metavar = "filename",
         help    = textwrap.dedent('''\
             the path pointing to the file or directory.
             If it's a directory, files contained in it with specified extensions will be converted to UTF-8.
