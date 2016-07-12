@@ -1,4 +1,4 @@
-# Encode Your Text Files in UTF-8
+# Converts text files or source code files into UTF-8 encoding
 
 This lightweight tool converts non-UTF-encoded (such as GB2312, GBK, BIG5 encoded) files, along with .java or other types of source code files, to UTF-8 encoded files.
 
@@ -69,6 +69,12 @@ ___Examples:___
     `python cvt2utf8.py "D:\workspace\a.txt"`
 
 
+* Show help information
+
+
+    `python cvt2utf8.py -h`
+
+
 #### (Linux only) Directly run the program
 
 Sometimes, you may want to run the program without specifying the Python interpretor, such as:
@@ -96,10 +102,26 @@ Finally, execute the file: (you could add command arguments here):
     ./cvt2utf8.py "~/the/base/dir"
 
 You might want to use absolute path for this program if you are running it in an arbitrary working directory.
-        
+
+
+#### Programmatically use this Python module
+
+For Python programmers who want to use this module, see below
+
+    
+    >>> from cvt2utf8 import Convert2Utf8
+    >>> cvt2utf8 = Convert2Utf8(['php', 'css', 'htm', 'html', 'js'], False, False)
+    >>> cvt2utf8.run('D:\\workspace')
+    >>> cvt2utf8.run('D:\\another\\folder')
+    
+Note: the constructor Convert2Utf8() takes 3 arguments: the extension list, the switch to keep BOM, the direct-overwriting mode.
+The usage of these arguments is same as the command-line method. 
+
+
 ## Miscellaneous
 
 By default, the converted output text files will __NOT__ contain BOM (byte order mark). Should you want to learn what is BOM along with its implication, please check: https://en.wikipedia.org/wiki/Byte_order_mark 
+
 
 ## FAQ
 
