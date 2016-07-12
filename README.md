@@ -57,7 +57,7 @@ ___Examples:___
 
 * Alternatively, if you are confident with Python's in-house encoding and decoding, you can simply convert files without creating backups.
     
-    Do NOT do this, unless you know what you are doing. 
+    Do __NOT__ call this, unless you know what you are doing. 
 
 
     `python cvt2utf8.py "D:\workspace" --overwrite`
