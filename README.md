@@ -32,7 +32,7 @@ ___Examples:___
     `python cvt2utf8.py "D:\mynotebook"`
     
 
-Afterwards, you could use any text editor (e.g. [Notepad++] (https://notepad-plus-plus.org/)) to verify the text files underneath the specified folder are already converted to UTF-8.
+    Afterwards, you could use any text editor (e.g. [Notepad++] (https://notepad-plus-plus.org/)) to verify the text files underneath the specified folder are already converted to UTF-8.
 
 * Change all .csv files to UTF-8 encoding. Since BOM are used by some applications (such as Microsoft Excel)
 
