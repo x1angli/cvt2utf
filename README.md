@@ -1,7 +1,7 @@
 # Converts text files or source code files into UTF-8 encoding
 
-This lightweight tool converts non-UTF-encoded (such as GB2312, GBK, BIG5 encoded) files, along with .java or other types of source code files, to UTF-8 encoded files.
-
+This lightweight tool converts non-UTF-encoded (such as GB2312, GBK, BIG5 encoded) files to UTF-8 encoded files. 
+It can either be executed from command line (CLI), or imported into other Python code.
 
 ## Installation
 1. Make sure Python 3 is properly installed. 
