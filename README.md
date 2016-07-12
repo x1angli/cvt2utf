@@ -19,25 +19,57 @@ This lightweight tool converts non-UTF-encoded (such as GB2312, GBK, BIG5 encode
     Note #2: For Windows users, you need to replace the 4th line above with `venv\bin\activate`
 
 ## Usage
-There are two arguments.
+There is only one mandatory argument: filename, where you can specify the directory or file name. 
+* If it's a directory, all text files that meets the criteria underneath it will be converted to UTF8-encoded ones.
+* If it's an individual file, it would be straightforwardly converted to UTF-8. 
 
-__* The base directory (Required)__
+___Examples:___
 
-In the line `root_path` please point "root_path" to the folder under which you want the files to be translated to UTF8-encoded. 
+* Change all .txt files to UTF-8 encoding. 
+--- Those byte-order marks a.k.a. "BOM"s or "signature"s in existing UTF-8 files will be removed. 
 
-    python cvt2utf8.py
 
-__* List all the types of files you want to convert__
-
-Just change the `ext_filter` to include the file extensions. 
+    python cvt2utf8.py "D:\mynotebook"
 
 Afterwards, you could use any text editor (e.g. [Notepad++] (https://notepad-plus-plus.org/)) to verify the text files underneath the specified folder are already converted to UTF-8.
+
+
+* Change all .csv files to UTF-8 encoding. Since BOM are used by some applications (such as Microsoft Excel)
+
+
+    python cvt2utf8.py "D:\mynotebook" --exts csv --keepbom
+
+
+* Convert all .php, .js, .java, .py files to UTF-8 encoding. 
+--- Also, make sure all BOMs are removed. They are really nuisance for source code files!
+
+
+    python cvt2utf8.py "D:\workspace" --exts php js java py
+
+
+* After manually verify the new UTF-8 files are correct, you can remove all .bak files
+
+
+    python cvt2utf8.py "D:\workspace" --cleanbak
+
+    
+* Alternatively, if you are confident with Python's in-house encoding and decoding, you can simply convert files without creating backups.
+--- Do NOT do this, unless you know what you are doing. 
+
+
+    python cvt2utf8.py "D:\workspace" --overwrite
+
+
+* Converts an individual file
+
+
+    python cvt2utf8.py "D:\workspace\a.txt"
 
 #### (Linux only) Directly run the program
 
 Sometimes, you may want to run the program without specifying the Python interpretor, such as:
     
-    ./cvt2utf8.py
+    ./cvt2utf8.py "~/mynotebooks"
     
 (Note the leading `python` command is missing here)
 
@@ -51,9 +83,13 @@ Then activate the virtual environment:
 
 Alternatively, if you already have all dependencies installed with your default python environment, or you've already activated virtualenv’s python you could skip this. 
 
+Then, make sure dependencies are installed
+
+    pip install -r requirements.txt
+
 Finally, execute the file: (you could add command arguments here):
 
-    ./cvt2utf8.py ~/the/base/dir
+    ./cvt2utf8.py "~/the/base/dir"
 
 You might want to use absolute path for this program if you are running it in an arbitrary working directory.
         
