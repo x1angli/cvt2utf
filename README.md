@@ -20,8 +20,8 @@ It can either be executed from command line (CLI), or imported into other Python
 
 ## Usage
 There is only one mandatory argument: filename, where you can specify the directory or file name. 
-* If it's a directory, all text files that meets the criteria underneath it will be converted to UTF8-encoded ones.
-* If it's an individual file, it would be straightforwardly converted to UTF-8. 
+* ___Batch mode___: Pass in a directory as the input, and all text files that meets the criteria underneath it will be converted to UTF8-encoding.
+* ___Single file mode____: If the input argument is just an individual file, it would be straightforwardly converted to UTF-8. 
 
 ___Examples:___
 
@@ -143,10 +143,4 @@ Side note: of course, there are certain situations where BOMs are preferred. (Fo
 
 #### Shall we trust this program?
 
-__A__: This code is still at its "beta" phase. We are working to provide a reliable solution to our users. Until then, we suggest you use this program/module with caution. Additionally, you should be aware of:
-
-1. that Python's built-in encoding/decoding mechanism is not reliable. In an experiment where I attempted to convert 1000+ text files into UTF-8 encoding. there was one file that was totally scrambled. Luckily, this program creates backups by default. With the recovered backup file, the conversion was achieved through a text editor. 
-
-2. that different standard or code may interpret special characters differently. For example, chardet package treats some special characters as "illegitimate", while a text editor may tolerate it.
-
-Bottom line: backup is a reliable safety net, and you should stick with it. 
+__A__: This code is still at its "beta" phase. We are striving to deliver high reliable solutions to our users. You might be aware that Python's built-in encoding/decoding mechanism may not be very reliable. For that reason, we suggest users create backups, either manually duplicate the file/directory, or automatically through our package (remember, the backup feature will be short-circuited with the `--overwrite` switch)
