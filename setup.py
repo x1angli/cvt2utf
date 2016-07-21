@@ -1,29 +1,40 @@
+"""A setuptools based setup module.
+"""
+
 from setuptools import setup
-import textwrap
+from codecs import open
+from os import path
+
+here = path.abspath(path.dirname(__file__))
+
+# Get the long description from the README file
+with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
+    long_description = f.read()
 
 
 setup(
     name="convert2utf",
+
     version="0.8",
-    license='https://opensource.org/licenses/MIT',
-    summary="A lightweight tool that converts non-UTF-encoded (such as GB2312, GBK, BIG5 encoded) files to UTF-8 encoded files. At the same time, it can also remove Byte-order-mark (BOM) in those files.",
-    description=textwrap.dedent("""
-        convert2utf
-        ===========
 
-        |PyPI version| |Build Status| |Coverage Status|
+    description="A lightweight tool that converts non-UTF-encoded (such as GB2312, GBK, BIG5 encoded) files to UTF-8 encoded files. At the same time, it can also remove Byte-order-mark (BOM) in those files.",
 
-        A lightweight tool that converts non-UTF-encoded (such as GB2312, GBK, BIG5 encoded) files to UTF-8 encoded files. It can also remove Byte-order-mark (BOM) in those files.
+    long_description=long_description,
 
-        convert2utf can either be executed from command line (CLI), or imported into other Python code.
-
-        There are two modes: batch mode and single file mode. Batch mode: Pass in a directory as the input, and all text files that meets the criteria underneath it will be converted to UTF8-encoding. Single file mode_: If the input argument is just an individual file, it would be straightforwardly converted to UTF-8."""),
     author='x1ang.li',
+
     author_email='convert2utf@x1ang.li',
+
     url='https://github.com/x1angli/convert2utf',
-    install_requires=['chardet'],
+
+    license='MIT',
+
+    keywords='sample setuptools development',
+
     classifiers=[
-        'License :: OSI Approved :: Apache Software License',
+        'License :: OSI Approved :: MIT License',
+        'Intended Audience :: End Users/Desktop',
+        'Intended Audience :: Developers',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
@@ -33,4 +44,8 @@ setup(
         'Topic :: Text Editors',
         'Topic :: Text Processing :: General',
     ],
+
+    install_requires=['chardet'],
+
+
 )

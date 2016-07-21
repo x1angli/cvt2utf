@@ -4,20 +4,20 @@ This lightweight tool converts non-UTF-encoded (such as GB2312, GBK, BIG5 encode
 It can either be executed from command line (CLI), or imported into other Python code.
 
 ## Installation
+
+### Automatic Installation (recommended)
 1. Make sure Python 3 is properly installed. 
-1. Also make sure `virtualenv` is installed. (Windows: `pip install virtualenv`, Linux: `sudo pip install virtualenv`)
-1. Clone this project onto your local hard drive, assuming the local folder name is "utf8_encode", which is the same as the project name. 
-1. Run the following commands:
+1. Setup Python virtual environment with `virtualenv ...` or `python -m venv ...`
 
-        cd utf8_encode
-        virtualenv ./venv
-        . venv/bin/activate
-        pip install -r requirements.txt
-    
-    Note #1: If you place this project into a folder whose name is different from "utf8_encode", please make appropriate change to the 1st line above.
-    
-    Note #2: For Windows users, you need to replace the 4th line above with `venv\bin\activate`
+`pip install convert2utf` 
 
+### Manual Installation (for developers only)
+1. Make sure Python 3 is properly installed. 
+1. Clone this project, or just download the zip file from github.com and unarchive it
+1. Start CLI (command line interface), enter the local folder
+1. Setup Python virtual environment with `virtualenv ...` or `python -m venv ...`
+1. `pip install -r requirements.txt1
+    
 ## Usage
 There is only one mandatory argument: filename, where you can specify the directory or file name. 
 * ___Batch mode___: Pass in a directory as the input, and all text files that meets the criteria underneath it will be converted to UTF8-encoding.
