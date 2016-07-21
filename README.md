@@ -6,8 +6,7 @@ It can either be executed from command line (CLI), or imported into other Python
 ## Installation
 
 ### Automatic Installation (recommended)
-1. Make sure Python 3 is properly installed. 
-1. Setup Python virtual environment with `virtualenv ...` or `python -m venv ...`
+1. Make sure Python 3, along with pip, is properly installed. 
 
 `pip install convert2utf` 
 
@@ -16,7 +15,7 @@ It can either be executed from command line (CLI), or imported into other Python
 1. Clone this project, or just download the zip file from github.com and unarchive it
 1. Start CLI (command line interface), enter the local folder
 1. Setup Python virtual environment with `virtualenv ...` or `python -m venv ...`
-1. `pip install -r requirements.txt1
+1. Run: `pip install -r requirements.txt`
     
 ## Usage
 There is only one mandatory argument: filename, where you can specify the directory or file name. 

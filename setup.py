@@ -23,13 +23,13 @@ setup(
 
     author='x1ang.li',
 
-    author_email='convert2utf@x1ang.li',
+    author_email='xl@cumuli-tech.com',
 
     url='https://github.com/x1angli/convert2utf',
 
     license='MIT',
 
-    keywords='sample setuptools development',
+    keywords='encoding UTF-8 UTF UTF8 GBK GB2312 Byte-Order-Mark BOM',
 
     classifiers=[
         'License :: OSI Approved :: MIT License',
@@ -46,6 +46,4 @@ setup(
     ],
 
     install_requires=['chardet'],
-
-
 )

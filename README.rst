@@ -27,7 +27,7 @@ Manual Installation (for developers only)
 #. Start CLI (command line interface), enter the local folder
 #. Setup Python virtual environment with ``virtualenv ...`` or
    ``python -m venv ...``
-#. \`pip install -r requirements.txt1
+#. Run: ``pip install -r requirements.txt``
 
 Usage
 -----
