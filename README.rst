@@ -12,18 +12,15 @@ Installation
 Automatic Installation (recommended)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Make sure Python 3 is properly installed.
-#. Setup Python virtual environment with ``virtualenv ...`` or
-   ``python -m venv ...``
-
-``pip install convert2utf``
+#. Make sure Python 3, along with pip, is properly installed.
+#. In your CLI, execute ``pip install convert2utf``
 
 Manual Installation (for developers only)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Make sure Python 3 is properly installed.
-#. Clone this project, or just download the zip file from github.com and
-   unarchive it
+#. Clone this project, or just download the .zip file from github.com
+   and unarchive it
 #. Start CLI (command line interface), enter the local folder
 #. Setup Python virtual environment with ``virtualenv ...`` or
    ``python -m venv ...``
@@ -48,7 +45,7 @@ the directory or file name.
    Those byte-order marks a.k.a. "BOM"s or "signature"s in existing
    UTF-8 files will be removed.
 
-   ``python cvt2utf8.py "D:\mynotebook"``
+   ``python cvt2utf.py "D:\mynotebook"``
 
    Afterwards, you could use any text editor (e.g. [Notepad++]
    (https://notepad-plus-plus.org/)) to verify the text files underneath
@@ -57,34 +54,34 @@ the directory or file name.
 -  Change all .csv files to UTF-8 encoding. Since BOM are used by some
    applications (such as Microsoft Excel)
 
-   ``python cvt2utf8.py "D:\mynotebook" --exts csv --keepbom``
+   ``python cvt2utf.py "D:\mynotebook" --exts csv --keepbom``
 
 -  Convert all .php, .js, .java, .py files to UTF-8 encoding.
 
    Also, make sure all BOMs are removed. They are really nuisance for
    source code files!
 
-   ``python cvt2utf8.py "D:\workspace" --exts php js java py``
+   ``python cvt2utf.py "D:\workspace" --exts php js java py``
 
 -  After manually verify the new UTF-8 files are correct, you can remove
    all .bak files
 
-   ``python cvt2utf8.py "D:\workspace" --cleanbak``
+   ``python cvt2utf.py "D:\workspace" --cleanbak``
 
 -  Alternatively, if you are confident with Python's in-house encoding
    and decoding, you can simply convert files without creating backups.
 
    Do **NOT** call this, unless you know what you are doing.
 
-   ``python cvt2utf8.py "D:\workspace" --overwrite``
+   ``python cvt2utf.py "D:\workspace" --overwrite``
 
 -  Converts an individual file
 
-   ``python cvt2utf8.py "D:\workspace\a.txt"``
+   ``python cvt2utf.py "D:\workspace\a.txt"``
 
 -  Show help information
 
-   ``python cvt2utf8.py -h``
+   ``python cvt2utf.py -h``
 
 (Linux only) Directly run the program
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -94,7 +91,7 @@ interpretor, such as:
 
 ::
 
-    ./cvt2utf8.py "~/mynotebooks"
+    ./cvt2utf.py "~/mynotebooks"
 
 (Note the leading ``python`` command is missing here)
 
@@ -104,7 +101,7 @@ permission:
 
 ::
 
-    sudo chmod +x ./cvt2utf8.py
+    sudo chmod +x ./cvt2utf.py
 
 Then activate the virtual environment:
 
@@ -126,22 +123,22 @@ Finally, execute the file: (you could add command arguments here):
 
 ::
 
-    ./cvt2utf8.py "~/the/base/dir"
+    ./cvt2utf.py "~/the/base/dir"
 
 You might want to use absolute path for this program if you are running
 it in an arbitrary working directory.
 
-Programmatically use this Python module
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(For developers) Programmatically use this Python module
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For Python programmers who want to use this module, see below
 
 ::
 
-    >>> from cvt2utf8 import Convert2Utf8
-    >>> cvt2utf8 = Convert2Utf8(['php', 'css', 'htm', 'html', 'js'], False, False)
-    >>> cvt2utf8.run('D:\\workspace')
-    >>> cvt2utf8.run('D:\\another\\folder')
+    >>> from cvt2utf import Convert2Utf8
+    >>> cvt2utf = Convert2Utf8(['php', 'css', 'htm', 'html', 'js'], False, False)
+    >>> cvt2utf.run('D:\\workspace')
+    >>> cvt2utf.run('D:\\another\\folder')
 
 | Note: the constructor Convert2Utf8() takes 3 arguments: the extension
   list, the switch to keep BOM, the direct-overwriting mode.

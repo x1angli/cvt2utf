@@ -7,12 +7,11 @@ It can either be executed from command line (CLI), or imported into other Python
 
 ### Automatic Installation (recommended)
 1. Make sure Python 3, along with pip, is properly installed. 
-
-`pip install convert2utf` 
+1. In your CLI, execute `pip install convert2utf` 
 
 ### Manual Installation (for developers only)
 1. Make sure Python 3 is properly installed. 
-1. Clone this project, or just download the zip file from github.com and unarchive it
+1. Clone this project, or just download the .zip file from github.com and unarchive it
 1. Start CLI (command line interface), enter the local folder
 1. Setup Python virtual environment with `virtualenv ...` or `python -m venv ...`
 1. Run: `pip install -r requirements.txt`
@@ -29,7 +28,7 @@ ___Examples:___
     Those byte-order marks a.k.a. "BOM"s or "signature"s in existing UTF-8 files will be removed. 
 
 
-    `python cvt2utf8.py "D:\mynotebook"`
+    `python cvt2utf.py "D:\mynotebook"`
     
 
     Afterwards, you could use any text editor (e.g. [Notepad++] (https://notepad-plus-plus.org/)) to verify the text files underneath the specified folder are already converted to UTF-8.
@@ -37,7 +36,7 @@ ___Examples:___
 * Change all .csv files to UTF-8 encoding. Since BOM are used by some applications (such as Microsoft Excel)
 
 
-    `python cvt2utf8.py "D:\mynotebook" --exts csv --keepbom`
+    `python cvt2utf.py "D:\mynotebook" --exts csv --keepbom`
 
 
 * Convert all .php, .js, .java, .py files to UTF-8 encoding. 
@@ -45,13 +44,13 @@ ___Examples:___
     Also, make sure all BOMs are removed. They are really nuisance for source code files!
 
 
-    `python cvt2utf8.py "D:\workspace" --exts php js java py`
+    `python cvt2utf.py "D:\workspace" --exts php js java py`
     
 
 * After manually verify the new UTF-8 files are correct, you can remove all .bak files
 
 
-    `python cvt2utf8.py "D:\workspace" --cleanbak`
+    `python cvt2utf.py "D:\workspace" --cleanbak`
 
 
 * Alternatively, if you are confident with Python's in-house encoding and decoding, you can simply convert files without creating backups.
@@ -59,32 +58,32 @@ ___Examples:___
     Do __NOT__ call this, unless you know what you are doing. 
 
 
-    `python cvt2utf8.py "D:\workspace" --overwrite`
+    `python cvt2utf.py "D:\workspace" --overwrite`
 
 
 * Converts an individual file
 
 
-    `python cvt2utf8.py "D:\workspace\a.txt"`
+    `python cvt2utf.py "D:\workspace\a.txt"`
 
 
 * Show help information
 
 
-    `python cvt2utf8.py -h`
+    `python cvt2utf.py -h`
 
 
 #### (Linux only) Directly run the program
 
 Sometimes, you may want to run the program without specifying the Python interpretor, such as:
 
-    ./cvt2utf8.py "~/mynotebooks"
+    ./cvt2utf.py "~/mynotebooks"
     
 (Note the leading `python` command is missing here)
 
 To achieve this, you first need to grant the execution permission onto the Python, (skip this provided it already have the eXecution permission:
 
-    sudo chmod +x ./cvt2utf8.py
+    sudo chmod +x ./cvt2utf.py
 
 Then activate the virtual environment:
     
@@ -98,20 +97,20 @@ Then, make sure dependencies are installed
 
 Finally, execute the file: (you could add command arguments here):
 
-    ./cvt2utf8.py "~/the/base/dir"
+    ./cvt2utf.py "~/the/base/dir"
 
 You might want to use absolute path for this program if you are running it in an arbitrary working directory.
 
 
-#### Programmatically use this Python module
+#### (For developers) Programmatically use this Python module
 
 For Python programmers who want to use this module, see below
 
     
-    >>> from cvt2utf8 import Convert2Utf8
-    >>> cvt2utf8 = Convert2Utf8(['php', 'css', 'htm', 'html', 'js'], False, False)
-    >>> cvt2utf8.run('D:\\workspace')
-    >>> cvt2utf8.run('D:\\another\\folder')
+    >>> from cvt2utf import Convert2Utf8
+    >>> cvt2utf = Convert2Utf8(['php', 'css', 'htm', 'html', 'js'], False, False)
+    >>> cvt2utf.run('D:\\workspace')
+    >>> cvt2utf.run('D:\\another\\folder')
     
 Note: the constructor Convert2Utf8() takes 3 arguments: the extension list, the switch to keep BOM, the direct-overwriting mode.
 The usage of these arguments is same as the command-line method. 
