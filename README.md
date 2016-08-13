@@ -142,3 +142,10 @@ Side note: of course, there are certain situations where BOMs are preferred. (Fo
 #### Is the current version reliable?
 
 __A__: This code is still at its "beta" phase. We are striving to deliver high reliable solutions to our users. You might be aware that Python's built-in UTF encoding/decoding plus chardet may not be very reliable. For that reason, we suggest users create backups, either manually duplicate the file/directory, or automatically through our package (remember, the backup feature will be short-circuited with the `--overwrite` switch)
+
+#### What kind of files should have BOM removed?
+__A__: Here is a list
+* __Jekyll__ : written in Ruby. [Details] (http://jekyllrb.com/docs/windows/#installation)
+* __PHP__ 
+* __JSP__
+* ... others....
