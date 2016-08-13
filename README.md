@@ -139,6 +139,6 @@ __A__: Most compilers and interpreters can handle UTF-8 source code files very w
 
 Side note: of course, there are certain situations where BOMs are preferred. (For example, Microsoft Excel cannot parse correctly UTF8 w/o BOM CSV files with international characters. ) Such situations are rare. Overall, the necessity of BOM trumps other concerns. 
 
-#### Shall we trust this program?
+#### Is the current version reliable?
 
-__A__: This code is still at its "beta" phase. We are striving to deliver high reliable solutions to our users. You might be aware that Python's built-in encoding/decoding mechanism may not be very reliable. For that reason, we suggest users create backups, either manually duplicate the file/directory, or automatically through our package (remember, the backup feature will be short-circuited with the `--overwrite` switch)
+__A__: This code is still at its "beta" phase. We are striving to deliver high reliable solutions to our users. You might be aware that Python's built-in UTF encoding/decoding plus chardet may not be very reliable. For that reason, we suggest users create backups, either manually duplicate the file/directory, or automatically through our package (remember, the backup feature will be short-circuited with the `--overwrite` switch)
