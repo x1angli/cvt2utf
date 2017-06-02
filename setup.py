@@ -1,7 +1,7 @@
 """A setuptools based setup module.
 """
 
-from setuptools import setup
+from setuptools import setup, find_packages
 from codecs import open
 from os import path
 
@@ -15,7 +15,9 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 setup(
     name="convert2utf",
 
-    version="0.8",
+    version="0.8.1",
+
+    packages=find_packages(),
 
     description="A lightweight tool that converts non-UTF-encoded (such as GB2312, GBK, BIG5 encoded) files to UTF-8 encoded files. At the same time, it can also remove Byte-order-mark (BOM) in those files.",
 
