@@ -15,7 +15,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 setup(
     name="convert2utf",
 
-    version="0.8.1",
+    version="0.8.2",
 
     packages=find_packages(),
 
@@ -41,6 +41,7 @@ setup(
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: Implementation :: CPython',
         'Topic :: Software Development :: Internationalization',
         'Topic :: Text Editors',

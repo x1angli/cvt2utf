@@ -146,7 +146,7 @@ def clean_backups(dirname):
                     log.info("Removed the file: %s", fullname)
 
 
-def main():
+def cli():
     parser = argparse.ArgumentParser(
         prog='cvt2utf8',
         description="A tool that converts non-UTF-encoded text files UTF-8 encoded files.",
@@ -207,4 +207,4 @@ def main():
         cvt2utf8.run(args.root)
 
 if __name__ == '__main__':
-    main()
+    cli()
