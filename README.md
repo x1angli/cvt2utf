@@ -19,7 +19,7 @@ It can either be executed from command line (CLI), or imported into other Python
 ## Usage
 There is only one mandatory argument: filename, where you can specify the directory or file name. 
 * ___Batch mode___: Pass in a directory as the input, and all text files that meets the criteria underneath it will be converted to UTF8-encoding.
-* ___Single file mode____: If the input argument is just an individual file, it would be straightforwardly converted to UTF-8. 
+* ___Single file mode___: If the input argument is just an individual file, it would be straightforwardly converted to UTF-8. 
 
 ___Examples:___
 
@@ -55,7 +55,7 @@ ___Examples:___
 
 * Alternatively, if you are confident with Python's in-house encoding and decoding, you can simply convert files without creating backups.
     
-    Do __NOT__ call this, unless you know what you are doing. 
+    Do __NOT__ run the command in this way, unless you know what you are doing. 
 
 
     `python cvt2utf.py "D:\workspace" --overwrite`
@@ -139,13 +139,18 @@ __A__: Most compilers and interpreters can handle UTF-8 source code files very w
 
 Side note: of course, there are certain situations where BOMs are preferred. (For example, Microsoft Excel cannot parse correctly UTF8 w/o BOM CSV files with international characters. ) Such situations are rare. Overall, the necessity of BOM trumps other concerns. 
 
+#### In particular, what kind of files should have BOM removed?
+__A__: Below is a list of places where BOM might cause a problem. To make your life easy and smooth, BOMs in these files are advised to be removed.
+* __Jekyll__ : Jekyll is a Ruby-based CMS that generates static websites. Please remove BOMs in your source files. Also, remove them in your CSS if you are SASSifying.
+* __PHP__: BOMs in `*.php` files should be stripped.
+* __JSP__: BOMs in `*.jsp` files should be stripped. 
+* (to be added...)
+
+#### Then, what kind of files should have BOM added?
+__A__: BOMs in these files are not necessary, but it is recommended to add them.
+* __Unicode plain text file__: M$ suggests "Always prefix a Unicode plain text file with a byte order mark" (https://msdn.microsoft.com/en-us/library/windows/desktop/dd374101(v=vs.85).aspx)
+* __CSV__: BOMs in CSV files might be useful and necessary.
+
 #### Is the current version reliable?
 
 __A__: This code is still at its "beta" phase. We are striving to deliver high reliable solutions to our users. You might be aware that Python's built-in UTF encoding/decoding plus chardet may not be very reliable. For that reason, we suggest users create backups, either manually duplicate the file/directory, or automatically through our package (remember, the backup feature will be short-circuited with the `--overwrite` switch)
-
-#### What kind of files should have BOM removed?
-__A__: Here is a list
-* __Jekyll__ : written in Ruby. [Details] (http://jekyllrb.com/docs/windows/#installation)
-* __PHP__ 
-* __JSP__
-* ... others....
