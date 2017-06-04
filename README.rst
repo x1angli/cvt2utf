@@ -1,10 +1,9 @@
 Converts text files or source code files into UTF-8 encoding
 ============================================================
 
-| This lightweight tool converts non-UTF-encoded (such as GB2312, GBK,
-  BIG5 encoded) files to UTF-8 encoded files.
-| It can either be executed from command line (CLI), or imported into
-  other Python code.
+This lightweight tool converts non-UTF-encoded (such as GB2312, GBK,
+BIG5 encoded) files to UTF-8 encoded files. It can either be executed
+from command line (CLI), or imported into other Python code.
 
 Installation
 ------------
@@ -12,31 +11,29 @@ Installation
 Automatic Installation (recommended)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Make sure Python 3, along with pip, is properly installed.
-#. In your CLI, execute ``pip install convert2utf``
+1. Make sure Python 3, along with pip, is properly installed.
+2. In your CLI, execute ``pip install convert2utf``
 
 Manual Installation (for developers only)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Make sure Python 3 is properly installed.
-#. Clone this project, or just download the .zip file from github.com
+1. Make sure Python 3 is properly installed.
+2. Clone this project, or just download the .zip file from github.com
    and unarchive it
-#. Start CLI (command line interface), enter the local folder
-#. Setup Python virtual environment with ``virtualenv ...`` or
+3. Start CLI (command line interface), enter the local folder
+4. Setup Python virtual environment with ``virtualenv ...`` or
    ``python -m venv ...``
-#. Run: ``pip install -r requirements.txt``
+5. Run: ``pip install -r requirements.txt``
 
 Usage
 -----
 
 There is only one mandatory argument: filename, where you can specify
-the directory or file name.
-
--  ***Batch mode***: Pass in a directory as the input, and all text
-   files that meets the criteria underneath it will be converted to
-   UTF8-encoding.
--  ***Single file mode***\ \_: If the input argument is just an
-   individual file, it would be straightforwardly converted to UTF-8.
+the directory or file name. \* ***Batch mode***: Pass in a directory as
+the input, and all text files that meets the criteria underneath it will
+be converted to UTF8-encoding. \* ***Single file mode***: If the input
+argument is just an individual file, it would be straightforwardly
+converted to UTF-8.
 
 ***Examples:***
 
@@ -71,7 +68,8 @@ the directory or file name.
 -  Alternatively, if you are confident with Python's in-house encoding
    and decoding, you can simply convert files without creating backups.
 
-   Do **NOT** call this, unless you know what you are doing.
+   Do **NOT** run the command in this way, unless you know what you are
+   doing.
 
    ``python cvt2utf.py "D:\workspace" --overwrite``
 
@@ -140,16 +138,17 @@ For Python programmers who want to use this module, see below
     >>> cvt2utf.run('D:\\workspace')
     >>> cvt2utf.run('D:\\another\\folder')
 
-| Note: the constructor Convert2Utf8() takes 3 arguments: the extension
-  list, the switch to keep BOM, the direct-overwriting mode.
-| The usage of these arguments is same as the command-line method.
+Note: the constructor Convert2Utf8() takes 3 arguments: the extension
+list, the switch to keep BOM, the direct-overwriting mode. The usage of
+these arguments is same as the command-line method.
 
 Miscellaneous
 -------------
 
 By default, the converted output text files will **NOT** contain BOM
 (byte order mark). Should you want to learn what is BOM along with its
-implication, please check: https://en.wikipedia.org/wiki/Byte_order_mark
+implication, please check:
+https://en.wikipedia.org/wiki/Byte\_order\_mark
 
 FAQ
 ---
@@ -186,13 +185,33 @@ preferred. (For example, Microsoft Excel cannot parse correctly UTF8 w/o
 BOM CSV files with international characters. ) Such situations are rare.
 Overall, the necessity of BOM trumps other concerns.
 
-Shall we trust this program?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+In particular, what kind of files should have BOM removed?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**A**: Below is a list of places where BOM might cause a problem. To
+make your life easy and smooth, BOMs in these files are advised to be
+removed. \* **Jekyll** : Jekyll is a Ruby-based CMS that generates
+static websites. Please remove BOMs in your source files. Also, remove
+them in your CSS if you are SASSifying. \* **PHP**: BOMs in ``*.php``
+files should be stripped. \* **JSP**: BOMs in ``*.jsp`` files should be
+stripped. \* (to be added...)
+
+Then, what kind of files should have BOM added?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**A**: BOMs in these files are not necessary, but it is recommended to
+add them. \* **Unicode plain text file**: M$ suggests "Always prefix a
+Unicode plain text file with a byte order mark"
+(https://msdn.microsoft.com/en-us/library/windows/desktop/dd374101(v=vs.85).aspx)
+\* **CSV**: BOMs in CSV files might be useful and necessary.
+
+Is the current version reliable?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 **A**: This code is still at its "beta" phase. We are striving to
 deliver high reliable solutions to our users. You might be aware that
-Python's built-in encoding/decoding mechanism may not be very reliable.
-For that reason, we suggest users create backups, either manually
-duplicate the file/directory, or automatically through our package
-(remember, the backup feature will be short-circuited with the
+Python's built-in UTF encoding/decoding plus chardet may not be very
+reliable. For that reason, we suggest users create backups, either
+manually duplicate the file/directory, or automatically through our
+package (remember, the backup feature will be short-circuited with the
 ``--overwrite`` switch)
