@@ -133,7 +133,7 @@ For Python programmers who want to use this module, see below
 
 ::
 
-    >>> from cvt2utf import Convert2Utf8
+    >>> from cvt2utf.cvt2utf import Convert2Utf8
     >>> cvt2utf = Convert2Utf8(['php', 'css', 'htm', 'html', 'js'], False, False)
     >>> cvt2utf.run('D:\\workspace')
     >>> cvt2utf.run('D:\\another\\folder')
