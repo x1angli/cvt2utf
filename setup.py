@@ -15,7 +15,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 setup(
     name="convert2utf",
 
-    version="0.8.3",
+    version="0.8.4",
 
     packages=find_packages(),
 
@@ -25,7 +25,7 @@ setup(
 
     author='x1ang.li',
 
-    author_email='xl@cumuli-tech.com',
+    author_email='xl@cumuli.tech',
 
     url='https://github.com/x1angli/convert2utf',
 
