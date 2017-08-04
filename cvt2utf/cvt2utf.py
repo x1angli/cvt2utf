@@ -9,12 +9,17 @@ import chardet
 
 # Default configuration will take effect when corresponding input args are missing.
 # Feel free to change this for your convenience.
-default_conf = {
+DEFAULT_CONF = {
     # Only those files ending with extensions in this list will be scanned or converted.
     'exts'      : ['txt'],
     'keep_BOM'  : False,
     'overwrite' : False,
 }
+
+# We have to set a minimum threshold. Only those encoding results returned by chartdet that are above that threshold level would be accepted.
+# See https://github.com/x1angli/convert2utf/issues/4 for further details
+CONFIDENCE_THRESHOLD = 0.8
+
 
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
 log = logging.getLogger(__name__)
@@ -58,13 +63,14 @@ class Convert2Utf8:
             log.info("Skipped empty file %s", filename)
             return
 
-        encoding = chardet.detect(bytedata)['encoding']
-        if encoding == None:
-            log.warning("Unable to detect the encoding of %s, so just leave it there.", filename)
+        chardet_result = chardet.detect(bytedata)
+        if chardet_result['encoding'] == None or chardet_result['confidence'] < CONFIDENCE_THRESHOLD:
+            log.warning("Unable to detect the encoding of %s, and it will be ignored.", filename)
             return
 
-        log.debug("Start scanning %s, which is %s - encoded", filename, encoding)
-        encoding = encoding.lower()
+        encoding = chardet_result['encoding'].lower()
+        log.debug("Scanned %s, which is %s - encoded", filename, encoding)
+
         if (encoding in self.skip_encoding):
             log.debug("Skipped %s - encoded %s", filename, encoding)
             return
@@ -165,7 +171,7 @@ def cli():
         '-e',
         '--exts',
         nargs   = '+', # '+'. Just like '*', all command-line args present are gathered into a list.
-        default = default_conf['exts'],
+        default = DEFAULT_CONF['exts'],
         help    = "the list of file extensions. Only those files ending with extensions in this list will be converted.",
         )
 
@@ -173,7 +179,7 @@ def cli():
         '-o',
         '--overwrite',
         action  = 'store_true',
-        default = default_conf['overwrite'],
+        default = DEFAULT_CONF['overwrite'],
         help    = "Danger! If you turn this switch on, it would directly overwrite existing file without creating any backups.",
         )
 
@@ -182,7 +188,7 @@ def cli():
         '--keepbom',
         action  = 'store_true',
         dest    = 'keep_BOM',
-        default = default_conf['keep_BOM'],
+        default = DEFAULT_CONF['keep_BOM'],
         help    = "If the text file begins with UTF-8's Byte-Order-Mask, we would keep it rather than remove it.",
         )
 
