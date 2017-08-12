@@ -108,7 +108,7 @@ You might want to use absolute path for this program if you are running it in an
 
 By default, the converted output text files will __NOT__ contain BOM (byte order mark). 
 
-However, you can use the switch `-a` or `--addbom` to explicitly include BOM in the output text files. 
+However, you can use the switch `-b` or `--addbom` to explicitly include BOM in the output text files. 
 
 To learn more, please check: https://en.wikipedia.org/wiki/Byte_order_mark 
 
