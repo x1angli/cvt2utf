@@ -78,9 +78,9 @@ class Convert2Utf8:
             log.info("Skipped %s, whose encoding is %s", filename, src_enc)
             return
 
-        # Since chardet only recognized all GB-based target_encoding as 'gb2312', we may encounter errors when the text file
-        # contains certain charaters, breaking the program. To make it more special-character-tolerant, we should
-        # upgrade the target_encoding to 'gb18030', which contains more characters than gb2312.
+        # Since chardet only recognized all GB-based target_encoding as 'gb2312', the decoding will fail when the text file
+        # contains certain special charaters. To make it more special-character-tolerant, we should
+        # upgrade the target_encoding to 'gb18030', which is a character set larger than gb2312.
         if src_enc.lower() == 'gb2312':
             src_enc = 'gb18030'
 
