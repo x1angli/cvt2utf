@@ -31,7 +31,7 @@ setup(
 
     license='MIT',
 
-    keywords='encoding UTF-8 UTF UTF8 GBK GB2312 Byte-Order-Mark BOM',
+    keywords='target_encoding UTF-8 UTF UTF8 GBK GB2312 Byte-Order-Mark BOM',
 
     classifiers=[
         'License :: OSI Approved :: MIT License',
