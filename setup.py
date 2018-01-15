@@ -7,11 +7,11 @@ from os import path
 
 
 # Get the long description from the README file
-try:
-    import pypandoc
-    long_description = pypandoc.convert('README.md', 'rst')
-except(IOError, ImportError):
-    long_description = open('README.md').read()
+# try:
+#     import pypandoc
+#     long_description = pypandoc.convert('README.md', 'rst')
+# except(IOError, ImportError):
+#     long_description = open('README.md').read()
 
 
 # here = path.abspath(path.dirname(__file__))
@@ -23,17 +23,15 @@ except(IOError, ImportError):
 setup(
     name="convert2utf",
 
-    version="1.0.1",
+    version="1.0.2",
 
     packages=find_packages(),
 
     description="A lightweight tool that converts non-UTF-encoded (such as GB2312, GBK, BIG5 encoded) files to UTF-8 encoded files. It can also add or remove Byte-order-mark (BOM) in UTF-encoded files.",
 
-    long_description=long_description,
-
     author='x1ang.li',
 
-    author_email='x@x1ang.li',
+    author_email='xl@x1ang.li',
 
     url='https://github.com/x1angli/convert2utf',
 
