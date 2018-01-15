@@ -3,3 +3,6 @@ include LICENSE
 
 # Include the gitignore file
 include .gitignore
+
+# To fix issue #5
+include README.md
