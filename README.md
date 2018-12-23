@@ -1,110 +1,71 @@
 # Converts text files or source code files into UTF-8 encoding
 
-This lightweight tool converts non-UTF-encoded (such as GB2312, GBK, BIG5 encoded) files to UTF-8 encoded files. 
-It can either be executed from command line (CLI), or imported into other Python code.
+This lightweight tool converts text files encoded in non-UTF (such as GB2312, GBK, BIG5) to UTF-8 encoded files. 
+It can either be executed from command line interface(a.k.a "CLI" or "console"), or imported into other Python code.
 
 ## Installation
 
-### Automatic Installation (recommended)
+### Getting Started!
 1. Make sure Python 3, along with pip, is properly installed. 
-1. In your CLI, execute `pip install convert2utf` 
-
-### Manual Installation (for developers only)
-1. Make sure Python 3 is properly installed. 
-1. Clone this project, or just download the .zip file from github.com and unarchive it
-1. Start CLI (command line interface), enter the local folder
-1. Setup Python virtual environment with `virtualenv ...` or `python -m venv ...`
-1. Run: `pip install -r requirements.txt`
+1. In your console, execute `pip install convert2utf` 
+1. After installation, make sure the `cvt2utf` is in your PATH environment variable.
     
 ## Usage
 There is only one mandatory argument: filename, where you can specify the directory or file name. 
-* ___Batch mode___: Pass in a directory as the input, and all text files that meets the criteria underneath it will be converted to UTF8-encoding.
+* ___Directory mode___: You should put in a directory as the input, and all text files that meets the criteria underneath it will be converted to UTF-8.
 * ___Single file mode___: If the input argument is just an individual file, it would be straightforwardly converted to UTF-8. 
 
 ___Examples:___
 
+* Changes all .txt files to UTF-8 encoding. Additionally, **removes BOMs** from utf_8_sig-encoded files: 
 
-* Change all .txt files to UTF-8 encoding. 
+    `cvt2utf "/path/to/your/repo" --exts txt`
 
-    `python cvt2utf.py "/path/to/your/repo"`
+* Changes all .txt files to UTF-8 encoding. But, leaves unchanged those utf_8_sig-encoded files: 
 
-* Change all .txt files to UTF-8 encoding. Plus remove byte-order marks (a.k.a. "BOM"s or "signature"s) from existing UTF-8 files. 
+    `cvt2utf "/path/to/your/repo" --skiputf`
 
-    `python cvt2utf.py "/path/to/your/repo" -u`
-
-* Change all .csv files to UTF-8 encoding. 
+* Changes all .csv files to UTF-8 encoding: 
 
      Since BOM are used by some applications (such as Microsoft Excel), we want to add BOM
 
-    `python cvt2utf.py "/path/to/your/repo" -b -u --exts csv`
+    `cvt2utf "/path/to/your/repo" -b --exts csv`
 
-
-* Convert all .php, .js, .java, .py files to UTF-8 encoding. 
-
-    Meanwhile, those BOMs from existing UTF-encoded files will be __removed__ . 
-
-    `python cvt2utf.py "/path/to/your/repo" -u --exts php js java py`
     
 * Convert all .c and .cpp files to UTF-8 with BOMs. 
 
     This action will also __add__ BOMs to existing UTF-encoded files. 
     
-    Per [issue#3](https://github.com/x1angli/convert2utf/issues/3), Visual Studio may mandate BOM in source files. If BOMs are missing, then Visual Studio will unable to compile them.
+    Visual Studio may mandate BOM in source files. If BOMs are missing, then Visual Studio will unable to compile them.
 
-    `python cvt2utf.py "/path/to/your/repo" -b -u --exts c cpp`
+    `cvt2utf "/path/to/your/repo" -b --exts c cpp`
     
+* Converts an individual file 
+
+    `cvt2utf "/path/to/your/repo/a.txt"`
 
 * After manually verify the new UTF-8 files are correct, you can remove all .bak files
 
-    `python cvt2utf.py "/path/to/your/repo" --cleanbak`
+    `cvt2utf cleanbak "/path/to/your/repo" `
 
 
 * Alternatively, if you are extremely confident with everything, you can simply convert files without creating backups in the beginning.
     
-    Do __NOT__ run the command in this way, unless you know what you are doing! 
+    Use the `--nobak` option with **extra caution**!
 
-    `python cvt2utf.py "/path/to/your/repo" --overwrite`
+    `cvt2utf "/path/to/your/repo" --nobak`
 
+* Display help information
 
-* Converts an individual file
+    `cvt2utf -h`
 
-    `python cvt2utf.py "/path/to/your/repo/a.txt"`
+* Show version information
 
-
-* Show help information
-
-    `python cvt2utf.py -h`
-
-
-#### (Linux only) Directly run the program
-
-Sometimes, you may want to run the program without specifying the Python interpretor, such as:
-
-    ./cvt2utf.py "/path/to/your/repo"
-    
-(Note the leading `python` command is missing here)
-
-To achieve this, you first need to grant the execution permission onto the Python, (skip this provided it already have the eXecution permission:
-
-    sudo chmod +x ./cvt2utf.py
-
-Then activate the virtual environment:
-    
-    . venv/bin/activate
-
-Next, make sure dependencies are installed
-
-    pip install -r requirements.txt
-
-Finally, execute the file: (you could add command arguments here):
-
-    ./cvt2utf.py "/path/to/your/repo"
-
-You might want to use absolute path for this program if you are running it in an arbitrary working directory.
-
- 
+    `cvt2utf -v`
 
 ## Miscellaneous
+
+### 1. About BOM
 
 By default, the converted output text files will __NOT__ contain BOM (byte order mark). 
 
@@ -112,12 +73,22 @@ However, you can use the switch `-b` or `--addbom` to explicitly include BOM in 
 
 To learn more, please check: https://en.wikipedia.org/wiki/Byte_order_mark 
 
+### 2. About file extensions
+
+You should only feed text-like files to cvt2utf, while binary files (such as .exe files) **should be** left untouched. 
+However, how to distinguish? Well, we use extension names. By default, files whose extentions are in the list: 
+`txt, cpp, c, hpp, h, php, md, json, py` will be processed. 
+You can customize this list either through editing the source code or with command line arguments.
+
+### 3. About file size limits
+
+We will ignore empty files. Also, we ignore files larger than 10MB. This is a reasonable limit. If you really wants to change it, feel free to do so.
 
 ## FAQ
 
 #### Why do we choose UTF-8 among all charsets? 
 
-For i18n, UTF-8 is wide spread. It is the de facto standard for non-English texts.
+For i18n, UTF-8 is wide spread. It is the de-facto standard for non-English texts.
 
 Compared with UTF-16, UTF-8 is usually more compact and "with full fidelity". It also doesn't suffer from the endianness issue of UTF-16. 
 
@@ -138,4 +109,4 @@ BOMs in these files are not necessary, but it is recommended to add them.
 * __CSV__: BOMs in CSV files might be useful and necessary.
 
 #### Is the current version reliable?
-We are striving to deliver high reliable solutions to our users. This code is still at its "beta" phase. You might be aware that Python's built-in UTF encoding/decoding plus chardet may not be very reliable. For that reason, we suggest users create backups, either manually duplicate the file/directory, or automatically through our package (remember, the backup feature will be short-circuited with the `--overwrite` switch)
+We are striving to deliver high reliable solutions to our users. This Python package re

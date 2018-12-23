@@ -1,9 +1,8 @@
 """A setuptools based setup module.
 """
 
+import os, textwrap
 from setuptools import setup, find_packages
-from codecs import open
-from os import path
 
 
 # Get the long description from the README file
@@ -19,19 +18,29 @@ from os import path
 # with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 #     long_description = f.read()
 
+meta_info = {}
+
+here = os.path.abspath(os.path.dirname(__file__))
+meta_f = os.path.join(here, 'cvt2utf', 'meta_inf.py')
+with open(meta_f) as fp:
+    exec(fp.read(), meta_info)
+
 
 setup(
     name="convert2utf",
 
-    version="1.0.2",
+    version=meta_info['__version__'],
 
-    packages=find_packages(),
+    packages=find_packages(exclude=['docs', 'examples', 'tests', 'venv']),
 
-    description="A lightweight tool that converts non-UTF-encoded (such as GB2312, GBK, BIG5 encoded) files to UTF-8 encoded files. It can also add or remove Byte-order-mark (BOM) in UTF-encoded files.",
+    description=textwrap.dedent('''
+        A lightweight tool that converts non-UTF-encoded (such as GB2312, BIG5 encoded) files to UTF-8 encoded files. 
+        It can also add or remove Byte-order-mark (BOM) in UTF-encoded files.
+        '''),
 
     author='x1ang.li',
 
-    author_email='xl@x1ang.li',
+    author_email='cvt2utf@x1ang.li',
 
     url='https://github.com/x1angli/convert2utf',
 
@@ -44,10 +53,9 @@ setup(
         'Intended Audience :: End Users/Desktop',
         'Intended Audience :: Developers',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: Implementation :: CPython',
         'Topic :: Software Development :: Internationalization',
         'Topic :: Text Editors',
@@ -55,4 +63,12 @@ setup(
     ],
 
     install_requires=['chardet'],
+
+    python_requires='>=3',
+
+    entry_points={
+        'console_scripts': [
+            'cvt2utf = cvt2utf.main:cli',
+        ],
+    }
 )
