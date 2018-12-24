@@ -10,7 +10,7 @@ import chardet
 from cvt2utf.meta_inf import __version__
 
 DEFAULT_CONF = {
-    'inc_exts': {'txt', 'cpp', 'c', 'hpp', 'h', 'php', 'md', 'json', 'py'},  # File extensions to be converted.
+    'inc_exts': {'txt'},  # File extensions to be converted.
     # Only those files ending with extensions in this list will be scanned or converted.
 
     'exc_exts': {'bak'},  # File ends with such extensions will NOT be converted.
@@ -240,7 +240,7 @@ def cli():
     )
 
     cvt_parser.add_argument(
-        '-e',
+        '-i',
         '--inc',
         nargs='+',  # '+'. Just like '*', all command-line args present are gathered into a list.
         dest='inc_exts',

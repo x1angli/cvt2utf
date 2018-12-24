@@ -19,17 +19,17 @@ ___Examples:___
 
 * Changes all .txt files to UTF-8 encoding. Additionally, **removes BOMs** from utf_8_sig-encoded files: 
 
-    `cvt2utf "/path/to/your/repo" --exts txt`
+    `cvt2utf "/path/to/your/repo" `
 
-* Changes all .txt files to UTF-8 encoding. But, leaves unchanged those utf_8_sig-encoded files: 
+* Changes all .php files to UTF-8 encoding. But, leaves unchanged those utf_8_sig-encoded files: 
 
-    `cvt2utf "/path/to/your/repo" --skiputf`
+    `cvt2utf "/path/to/your/repo" -i php --skiputf`
 
-* Changes all .csv files to UTF-8 encoding: 
+* Changes all .csv files to UTF-8 encoding. But leaves .txt files unchanged: 
 
      Since BOM are used by some applications (such as Microsoft Excel), we want to add BOM
 
-    `cvt2utf "/path/to/your/repo" -b --exts csv`
+    `cvt2utf "/path/to/your/repo" -b -i csv -x txt`
 
     
 * Convert all .c and .cpp files to UTF-8 with BOMs. 
@@ -38,7 +38,7 @@ ___Examples:___
     
     Visual Studio may mandate BOM in source files. If BOMs are missing, then Visual Studio will unable to compile them.
 
-    `cvt2utf "/path/to/your/repo" -b --exts c cpp`
+    `cvt2utf "/path/to/your/repo" -b -i c cpp -x txt`
     
 * Converts an individual file 
 
@@ -76,9 +76,8 @@ To learn more, please check: https://en.wikipedia.org/wiki/Byte_order_mark
 ### 2. About file extensions
 
 You should only feed text-like files to cvt2utf, while binary files (such as .exe files) **should be** left untouched. 
-However, how to distinguish? Well, we use extension names. By default, files whose extentions are in the list: 
-`txt, cpp, c, hpp, h, php, md, json, py` will be processed. 
-You can customize this list either through editing the source code or with command line arguments.
+However, how to distinguish? Well, we use extension names. By default, files with the extension `txt` will be processed.
+Feel free to customize this list either through editing the source code or with command line arguments.
 
 ### 3. About file size limits
 
