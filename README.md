@@ -1,3 +1,8 @@
+[![PyPI version](https://img.shields.io/pypi/v/convert2utf.svg)](https://pypi.python.org/pypi/convert2utf/)
+[![Supported Python version](https://img.shields.io/pypi/pyversions/convert2utf.svg)](https://pypi.python.org/pypi/convert2utf/)
+[![PyPI implementation](https://img.shields.io/pypi/implementation/convert2utf.svg)](https://pypi.python.org/pypi/convert2utf/)
+
+
 # Converts text files or source code files into UTF-8 encoding
 
 This lightweight tool converts text files encoded in non-UTF (such as GB2312, GBK, BIG5) to UTF-8 encoded files. 
@@ -104,10 +109,15 @@ Below is a list of places where BOM might cause a problem. To make your life eas
 
 #### When should we add BOM?
 BOMs in these files are not necessary, but it is recommended to add them.
-* __Unicode plain text file__: Microsoft suggests "Always prefix a Unicode plain text file with a byte order mark" (https://msdn.microsoft.com/en-us/library/windows/desktop/dd374101(v=vs.85).aspx)
-Visual Studio may mandate BOM in source files. If BOMs are missing, then Visual Studio will unable to compile them.
+* __Source Code in Visual Studio Projects__: 
 
-* __CSV__: BOMs in CSV files might be useful and necessary, especially if it is opened by Excel.
+    It is recommended in MSDN that "Always prefix a Unicode plain text file with a byte order mark" [Link](https://msdn.microsoft.com/en-us/library/windows/desktop/dd374101(v=vs.85).aspx). 
+
+    Visual Studio may mandate BOM in source files. If BOMs are missing, then Visual Studio may not be able to compile them.
+
+* __CSV__: 
+
+    BOMs in CSV files might be useful and necessary, especially if it is opened by Excel.
 
 #### Is the current version reliable?
 We are dedicated to deliver quality tools to friends like you. This Python package relies on chardet, which is not so intelligent in terms of recognizing file codecs. Hopefully, better solutions will appear in the future.
