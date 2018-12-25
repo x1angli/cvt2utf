@@ -68,15 +68,13 @@ ___Examples:___
 
     `cvt2utf -v`
 
-## Miscellaneous
+## Usage Note
 
 ### 1. About BOM
 
 By default, the converted output text files will __NOT__ contain BOM (byte order mark). 
 
 However, you can use the switch `-b` or `--addbom` to explicitly include BOM in the output text files. 
-
-To learn more, please check: https://en.wikipedia.org/wiki/Byte_order_mark 
 
 ### 2. About file extensions
 
@@ -87,6 +85,33 @@ Feel free to customize this list either through editing the source code or with 
 ### 3. About file size limits
 
 We will ignore empty files. Also, we ignore files larger than 10MB. This is a reasonable limit. If you really wants to change it, feel free to do so.
+
+## Trivial knowledge
+
+### 1. About BOM
+To learn more about byte-order-mark (BOM), please check: https://en.wikipedia.org/wiki/Byte_order_mark 
+
+#### 1.1 When should we remove BOM?
+Below is a list of places where BOM might cause a problem. To make your life easy and smooth, BOMs in these files are advised to be removed.
+* __Jekyll__ : Jekyll is a Ruby-based CMS that generates static websites. Please remove BOMs in your source files. Also, remove them in your CSS if you are SASSifying.
+* __PHP__: BOMs in `*.php` files should be stripped.
+* __JSP__: BOMs in `*.jsp` files should be stripped. 
+* (to be added...)
+
+#### 1.2 When should we add BOM?
+BOMs in these files are not necessary, but it is recommended to add them.
+
+* __Source Code in Visual Studio Projects__: 
+    It is recommended in MSDN that "Always prefix a Unicode plain text file with a byte order mark" [Link](https://msdn.microsoft.com/en-us/library/windows/desktop/dd374101(v=vs.85).aspx). 
+    Visual Studio may mandate BOM in source files. If BOMs are missing, then Visual Studio may not be able to compile them.
+
+* __CSV__: 
+    BOMs in CSV files might be useful and necessary, especially if it is opened by Excel.
+
+### 2. About Unicode
+[其实你并不懂 Unicode by 纤夫张](https://zhuanlan.zhihu.com/p/53714077)
+
+
 
 ## FAQ
 
@@ -99,25 +124,6 @@ Compared with UTF-16, UTF-8 is usually more compact and "with full fidelity". It
 #### Why do we need this tool?
 
 Indeed, there are a bunch of text editors out there (such as Notepad++) that handle various encodings of text files very well. Yet for the purpose of __batch conversion__ we need this Python script. This script is also written for educational purpose -- developers can learn from this script to get an idea of how to handle text encoding.
-
-#### When should we remove BOM?
-Below is a list of places where BOM might cause a problem. To make your life easy and smooth, BOMs in these files are advised to be removed.
-* __Jekyll__ : Jekyll is a Ruby-based CMS that generates static websites. Please remove BOMs in your source files. Also, remove them in your CSS if you are SASSifying.
-* __PHP__: BOMs in `*.php` files should be stripped.
-* __JSP__: BOMs in `*.jsp` files should be stripped. 
-* (to be added...)
-
-#### When should we add BOM?
-BOMs in these files are not necessary, but it is recommended to add them.
-* __Source Code in Visual Studio Projects__: 
-
-    It is recommended in MSDN that "Always prefix a Unicode plain text file with a byte order mark" [Link](https://msdn.microsoft.com/en-us/library/windows/desktop/dd374101(v=vs.85).aspx). 
-
-    Visual Studio may mandate BOM in source files. If BOMs are missing, then Visual Studio may not be able to compile them.
-
-* __CSV__: 
-
-    BOMs in CSV files might be useful and necessary, especially if it is opened by Excel.
 
 #### Is the current version reliable?
 We are dedicated to deliver quality tools to friends like you. This Python package relies on chardet, which is not so intelligent in terms of recognizing file codecs. Hopefully, better solutions will appear in the future.

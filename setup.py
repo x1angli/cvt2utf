@@ -31,12 +31,24 @@ setup(
 
     version=meta_info['__version__'],
 
+    description="A one-line command that converts source code files into UTF-8 or UTF-8-BOM.",
+
+    long_description=textwrap.dedent('''
+    A lightweight tool that converts non-UTF-encoded (such as GB2312, BIG5 encoded) files to UTF-8 encoded files. 
+    It can also add or remove Byte-order-mark (BOM) in UTF-encoded files.
+    '''),
+
     packages=find_packages(exclude=['docs', 'examples', 'tests', 'venv']),
 
-    description=textwrap.dedent('''
-        A lightweight tool that converts non-UTF-encoded (such as GB2312, BIG5 encoded) files to UTF-8 encoded files. 
-        It can also add or remove Byte-order-mark (BOM) in UTF-encoded files.
-        '''),
+    install_requires=['chardet'],
+
+    entry_points={
+        'console_scripts': [
+            'cvt2utf = cvt2utf.main:cli',
+        ],
+    },
+
+    python_requires='>=3',
 
     author='x1ang.li',
 
@@ -62,13 +74,4 @@ setup(
         'Topic :: Text Processing :: General',
     ],
 
-    install_requires=['chardet'],
-
-    python_requires='>=3',
-
-    entry_points={
-        'console_scripts': [
-            'cvt2utf = cvt2utf.main:cli',
-        ],
-    }
 )
