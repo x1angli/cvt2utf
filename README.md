@@ -1,6 +1,6 @@
-[![PyPI version](https://img.shields.io/pypi/v/convert2utf.svg)](https://pypi.python.org/pypi/convert2utf/)
-[![Supported Python version](https://img.shields.io/pypi/pyversions/convert2utf.svg)](https://pypi.python.org/pypi/convert2utf/)
-[![PyPI implementation](https://img.shields.io/pypi/implementation/convert2utf.svg)](https://pypi.python.org/pypi/convert2utf/)
+[![PyPI version](https://img.shields.io/pypi/v/cvt2utf.svg)](https://pypi.python.org/pypi/cvt2utf/)
+[![Supported Python version](https://img.shields.io/pypi/pyversions/cvt2utf.svg)](https://pypi.python.org/pypi/cvt2utf/)
+[![PyPI implementation](https://img.shields.io/pypi/implementation/cvt2utf.svg)](https://pypi.python.org/pypi/cvt2utf/)
 
 
 # Converts text files or source code files into UTF-8 encoding
@@ -12,7 +12,7 @@ It can either be executed from command line interface(a.k.a "CLI" or "console"),
 
 ### Getting Started!
 1. Make sure Python 3, along with pip, is properly installed. 
-1. In your console, execute `pip install convert2utf` 
+1. In your console, execute `pip install cvt2utf` 
 1. After installation, make sure the `cvt2utf` is in your PATH environment variable.
     
 ## Usage

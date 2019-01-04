@@ -27,7 +27,7 @@ with open(meta_f) as fp:
 
 
 setup(
-    name="convert2utf",
+    name="cvt2utf",
 
     version=meta_info['__version__'],
 
@@ -54,7 +54,7 @@ setup(
 
     author_email='cvt2utf@x1ang.li',
 
-    url='https://github.com/x1angli/convert2utf',
+    url='https://github.com/x1angli/cvt2utf',
 
     license='MIT',
 

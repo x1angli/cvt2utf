@@ -27,7 +27,7 @@ DEFAULT_CONF = {
     'confi_thres': 0.8,
     # We have to set a minimum threshold. Only those target_encoding results returned by chartdet that are above
     # that threshold level would be accepted.
-    # See https://github.com/x1angli/convert2utf/issues/4 for further details
+    # See https://github.com/x1angli/cvt2utf/issues/4 for further details
 
     'cut_time': 40  # The cut-off time used when executing, unit: minutes
 }
