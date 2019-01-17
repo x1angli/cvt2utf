@@ -109,8 +109,8 @@ BOMs in these files are not necessary, but it is recommended to add them.
     BOMs in CSV files might be useful and necessary, especially if it is opened by Excel.
 
 ### 2. About Unicode
-[其实你并不懂 Unicode by 纤夫张](https://zhuanlan.zhihu.com/p/53714077)
-[UTF-8 编码及检查其完整性](https://juejin.im/post/5c3ff87f6fb9a049c15f7db0)
+* [其实你并不懂 Unicode by 纤夫张](https://zhuanlan.zhihu.com/p/53714077)
+* [UTF-8 编码及检查其完整性](https://juejin.im/post/5c3ff87f6fb9a049c15f7db0)
 
 
 ## FAQ
