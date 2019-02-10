@@ -125,5 +125,11 @@ Compared with UTF-16, UTF-8 is usually more compact and "with full fidelity". It
 
 Indeed, there are a bunch of text editors out there (such as Notepad++) that handle various encodings of text files very well. Yet for the purpose of __batch conversion__ we need this Python script. This script is also written for educational purpose -- developers can learn from this script to get an idea of how to handle text encoding.
 
+Additionaly, some users gave me the feedback to bring into attention those Linux commands such as `sed`, `iconv`, `enca`. All of them have the limitation that they are Linux-only commands, and not applicable for other OS. 
+* __`iconv`__ requires you to explicitly specify the "from-encoding" of the file. Moreover, it converts a single file at at time, so that you have to write a bash script for batch conversion. Worst of all, it lacks adaptability so that the set of files have to be encoded in the same character set. See [here](https://www.tecmint.com/convert-files-to-utf-8-encoding-in-linux/) for more information.
+* __`recode`__ is really a nice and powerful tool. It goes further by supporting CR-LF conversion and Base64. See [here](https://stackoverflow.com/questions/64860/best-way-to-convert-text-files-between-character-sets) and [here](https://github.com/rrthomas/recode/).
+* __`sed`__ can be used to add or remove BOM. It can also be used in combination with `iconv`. 
+* __`enca`__ is used to detect the current encoding of a file.
+
 #### Is the current version reliable?
 We are dedicated to deliver quality tools to friends like you. This Python package relies on chardet, which is not so intelligent in terms of recognizing file codecs. Hopefully, better solutions will appear in the future.
