@@ -110,7 +110,7 @@ BOMs in these files are not necessary, but it is recommended to add them.
 
 ### 2. About Unicode
 * [其实你并不懂 Unicode by 纤夫张](https://zhuanlan.zhihu.com/p/53714077)
-* [UTF-8 编码及检查其完整性](https://juejin.im/post/5c3ff87f6fb9a049c15f7db0)
+* [UTF-8 编码及检查其完整性](https://github.com/hsiaosiyuan0/blog/blob/master/%2Fposts%2Fos%2FUTF-8%20%E7%BC%96%E7%A0%81%E5%8F%8A%E6%A3%80%E6%9F%A5%E5%85%B6%E5%AE%8C%E6%95%B4%E6%80%A7.md)
 
 
 ## FAQ
