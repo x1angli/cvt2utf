@@ -17,7 +17,7 @@ DEFAULT_CONF = {
 
     'size_limit': 10 * 1024 ** 2,  # if the file is larger than this size limit, we could skip it. default 10MB
 
-    'codec_chain': ['ascii', 'utf_8_sig', 'latin_1', 'chardet'],
+    'codec_chain': ['ascii', 'utf_8_sig', 'chardet'],
     # We will try elements in this list sequentially.
     # If the element is `chardet` we will obtain the result from chardet.
     # If the element is a valid codec name, we will attempt to open the file with the `strict` mode
