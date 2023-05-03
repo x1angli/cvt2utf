@@ -1,18 +1,16 @@
-[![PyPI version](https://img.shields.io/pypi/v/cvt2utf.svg)](https://pypi.python.org/pypi/cvt2utf/)
-[![Supported Python version](https://img.shields.io/pypi/pyversions/cvt2utf.svg)](https://pypi.python.org/pypi/cvt2utf/)
-[![PyPI implementation](https://img.shields.io/pypi/implementation/cvt2utf.svg)](https://pypi.python.org/pypi/cvt2utf/)
-
-
 # Converts text files or source code files into UTF-8 encoding
 
-This lightweight tool converts text files encoded in non-UTF (such as GB2312, GBK, BIG5) to UTF-8 encoded files. 
-It can either be executed from command line interface(a.k.a "CLI" or "console"), or imported into other Python code.
+A lightweight tool that converts txt and source code files into UTF-8 encodings.
+It can either be executed from command line interface(a.k.a "CLI" or "console"), or imported into your own Python code.
 
 ## Installation
 
-### Getting Started!
-1. Make sure Python 3, along with pip, is properly installed. 
-1. In your console, execute `pip install cvt2utf` 
+1. Make sure Python 3 (Preferably 3.7 or above) is properly installed.
+   2. [Optional] Dependency management tools such as [Poetry](https://python-poetry.org/) are also recommended.
+1. Install Dependencies
+   2. In your console, execute `pip3 install cvt2utf`
+   2. Or, `pip3 install -r "./requirements.txt"`
+   2. Or, for Poetry users, run `poetry install`
 1. After installation, make sure the `cvt2utf` is in your PATH environment variable.
     
 ## Usage
@@ -26,15 +24,15 @@ ___Examples:___
 
     `cvt2utf convert "/path/to/your/repo" `
 
-* Changes all .php files to UTF-8 encoding. But, leaves unchanged those utf_8_sig-encoded files: 
+* Changes all .php files to UTF-8 encoding. But, skip processing those utf_8_sig-encoded PHP files: 
 
-    `cvt2utf convert "/path/to/your/repo" -i php --skiputf`
+    `cvt2utf convert "/path/to/your/repo" -ext php --skiputf`
 
-* Changes all .csv files to UTF-8 encoding. But leaves .txt files unchanged: 
+* Changes all .csv files to UTF-8-SIG encoding.
 
      Since BOM are used by some applications (such as Microsoft Excel), we want to add BOM
 
-    `cvt2utf convert "/path/to/your/repo" -b -i csv -x txt`
+    `cvt2utf convert "/path/to/your/repo" -bom -ext csv`
 
     
 * Convert all .c and .cpp files to UTF-8 with BOMs. 
@@ -43,7 +41,7 @@ ___Examples:___
     
     Visual Studio may mandate BOM in source files. If BOMs are missing, then Visual Studio will unable to compile them.
 
-    `cvt2utf convert "/path/to/your/repo" -b -i c cpp -x txt`
+    `cvt2utf convert "/path/to/your/repo" -bom -ext c cpp`
     
 * Converts an individual file 
 
@@ -98,7 +96,7 @@ Below is a list of places where BOM might cause a problem. To make your life eas
 * __JSP__: BOMs in `*.jsp` files should be stripped. 
 * (to be added...)
 
-#### 1.2 When should we add BOM?
+#### 2 When should we add BOM?
 BOMs in these files are not necessary, but it is recommended to add them.
 
 * __Source Code in Visual Studio Projects__: 
@@ -108,7 +106,16 @@ BOMs in these files are not necessary, but it is recommended to add them.
 * __CSV__: 
     BOMs in CSV files might be useful and necessary, especially if it is opened by Excel.
 
-### 2. About Unicode
+### 2. About UTF & Unicode
+
+![img.png](https://ask.qcloudimg.com/draft/1300884/xmwux3k6z4.jpg)
+* **ASCII**: Just 1 byte. 1st byte: `00`~`7F`
+* **Latin-1**: Just 1 byte. ASCII charset + (`80`~`FF`)
+* **GB2312**: 2 bytes. ASCII charset + (1st byte: `A1`~`FE` (or more restrictively, `A1`~`F7`) with 2nd byte: `A1`~`FE`).
+* **GBK**: 2 bytes. ASCII charset + (1st byte: `A1`~`FE` with 2nd byte: `40`~`FE`).
+* **UTF-8**: Variable Length:  `0x00`~`0x7F`; `0x80`~`0x7FF`; `0x800`~`0xFFFF`; `0x10000`~`0x10FFFF`
+
+#### See Also
 * [其实你并不懂 Unicode by 纤夫张](https://zhuanlan.zhihu.com/p/53714077)
 * [UTF-8 编码及检查其完整性](https://github.com/hsiaosiyuan0/blog/blob/master/%2Fposts%2Fos%2FUTF-8%20%E7%BC%96%E7%A0%81%E5%8F%8A%E6%A3%80%E6%9F%A5%E5%85%B6%E5%AE%8C%E6%95%B4%E6%80%A7.md)
 
@@ -117,19 +124,16 @@ BOMs in these files are not necessary, but it is recommended to add them.
 
 #### Why do we choose UTF-8 among all charsets? 
 
-For i18n, UTF-8 is wide spread. It is the de-facto standard for non-English texts.
+It is the de-facto standard for i18n.
 
 Compared with UTF-16, UTF-8 is usually more compact and "with full fidelity". It also doesn't suffer from the endianness issue of UTF-16. 
 
 #### Why do we need this tool?
 
-Indeed, there are a bunch of text editors out there (such as Notepad++) that handle various encodings of text files very well. Yet for the purpose of __batch conversion__ we need this Python script. This script is also written for educational purpose -- developers can learn from this script to get an idea of how to handle text encoding.
+Indeed, there are a bunch of text editors with stunning text encoding capabilities. Yet for users who want to do __batch conversions__ this tool could be handy. 
 
-Additionaly, some users gave me the feedback to bring into attention those Linux commands such as `sed`, `iconv`, `enca`. All of them have the limitation that they are Linux-only commands, and not applicable for other OS. 
-* __`iconv`__ requires you to explicitly specify the "from-encoding" of the file. Moreover, it converts a single file at at time, so that you have to write a bash script for batch conversion. Worst of all, it lacks adaptability so that the set of files have to be encoded in the same character set. See [here](https://www.tecmint.com/convert-files-to-utf-8-encoding-in-linux/) for more information.
+Additionally, some users gave me the feedback to bring into attention those Linux commands such as `sed`, `iconv`, `enca`. All of them have the limitation that they are Linux-only commands, and not applicable for other OS. 
+* __`iconv`__ requires you to explicitly specify the "from-encoding" of the file. Moreover, it converts a single file at a time, so that you have to write a bash script for batch conversion. Worst of all, it lacks adaptability so that the set of files have to be encoded in the same character set. See [here](https://www.tecmint.com/convert-files-to-utf-8-encoding-in-linux/) for more information.
 * __`recode`__ is really a nice and powerful tool. It goes further by supporting CR-LF conversion and Base64. See [here](https://stackoverflow.com/questions/64860/best-way-to-convert-text-files-between-character-sets) and [here](https://github.com/rrthomas/recode/).
 * __`sed`__ can be used to add or remove BOM. It can also be used in combination with `iconv`. 
 * __`enca`__ is used to detect the current encoding of a file.
-
-#### Is the current version reliable?
-We are dedicated to deliver quality tools to friends like you. This Python package relies on chardet, which is not so intelligent in terms of recognizing file codecs. Hopefully, better solutions will appear in the future.

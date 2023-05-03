@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "cvt2utf"
+version = "2.0.0"
+description = "A lightweight tool that converts txt and source code files into UTF-8 encodings."
+authors = ["x1angli <github@x1ang.li>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+chardet = "5.1.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
