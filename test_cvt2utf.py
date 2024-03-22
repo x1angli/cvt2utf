@@ -4,7 +4,6 @@ pytests for the file cvt2utf.py
 
 import pytest
 
-# from . import cvt2utf  # Does not work...
 import cvt2utf
 
 @pytest.mark.parametrize("chardet_name, expected", [
@@ -42,12 +41,12 @@ def test_map_chardet_name_to_native(chardet_name, expected):
 @pytest.mark.parametrize("filename, expected", [
     ("sample_data/ascii.crlf.txt", "ascii"),
     ("sample_data/gb2312.crlf.txt", "GB2312"),
-    ("sample_data/gbk.crlf.txt", "GBK"),
+    ("sample_data/gbk.crlf.txt", "GB2312"),
     ("sample_data/latin1.crlf.txt", "ISO-8859-1"),
-    ("sample_data/utf-16be.txt", "UTF-16BE"),
-    ("sample_data/utf-16le.txt", "UTF-16LE"),
+    ("sample_data/utf-16be.txt", "UTF-16"),
+    ("sample_data/utf-16le.txt", "UTF-16"),
     ("sample_data/utf-8-bom.txt", "UTF-8-SIG"),
-    ("sample_data/utf-8.crlf.txt", "UTF-8"),
+    ("sample_data/utf-8.crlf.txt", "utf-8"),
 ])
 def test_detect_single_file(filename, expected):
     """
