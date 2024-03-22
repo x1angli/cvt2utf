@@ -4,8 +4,8 @@ pytests for the file cvt2utf.py
 
 import pytest
 
-from . import cvt2utf
-
+# from . import cvt2utf  # Does not work...
+import cvt2utf
 
 @pytest.mark.parametrize("chardet_name, expected", [
     ('ascii', 'utf_8'),
