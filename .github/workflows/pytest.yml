@@ -17,4 +17,5 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - run: pip install --upgrade pip wheel
       - run: pip install pytest
+      - run: pip install --editable .
       - run: pytest
